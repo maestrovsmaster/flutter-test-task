@@ -1,6 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:pixelfield_flutter_task/core/theme/app_theme.dart';
 import 'package:pixelfield_flutter_task/data/models/item_model.dart';
 import 'core/di/di_container.dart' as di;
 import 'presentation/bloc/collection/collection_block.dart';
@@ -12,7 +15,17 @@ Future<void> main() async {
   Hive.registerAdapter(ItemModelAdapter());
   await di.init();
 
-  runApp(const MyApp());
+
+  WidgetsFlutterBinding.ensureInitialized();
+  var delegate = await LocalizationDelegate.create(
+    fallbackLocale: 'en',
+    supportedLocales: ['en', 'cs'],
+  );
+
+
+  runApp(
+    LocalizedApp(delegate, MyApp()),
+       );
 }
 
 class MyApp extends StatelessWidget {
@@ -20,13 +33,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     return MaterialApp(
       title: 'Pixelfield Flutter Task',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: AppTheme.theme,
       home: BlocProvider(
-        create: (context) => di.sl<PaginationBloc>(),
+        create: (context) => di.sl<CollectionBloc>(),
         child: const ItemGridScreen(),
       ),
     );
   }
 }
+

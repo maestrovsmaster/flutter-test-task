@@ -2,23 +2,23 @@
 import 'package:equatable/equatable.dart';
 import 'package:pixelfield_flutter_task/data/models/item_model.dart';
 
-abstract class PaginationState extends Equatable {
+abstract class CollectionState extends Equatable {
   @override
   List<Object?> get props => [];
 }
 
-class PaginationInitial extends PaginationState {}
+class CollectionInitial extends CollectionState {}
 
-class PaginationLoading extends PaginationState {}
+class CollectionLoading extends CollectionState {}
 
-class PaginationLoaded extends PaginationState {
+class CollectionLoaded extends CollectionState {
   final List<ItemModel> items;
   final bool hasReachedMax;
 
-  PaginationLoaded({required this.items, required this.hasReachedMax});
+  CollectionLoaded({required this.items, required this.hasReachedMax});
 
-  PaginationLoaded copyWith({List<ItemModel>? items, bool? hasReachedMax}) {
-    return PaginationLoaded(
+  CollectionLoaded copyWith({List<ItemModel>? items, bool? hasReachedMax}) {
+    return CollectionLoaded(
       items: items ?? this.items,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
     );
@@ -28,4 +28,17 @@ class PaginationLoaded extends PaginationState {
   List<Object?> get props => [items, hasReachedMax];
 }
 
-class PaginationError extends PaginationState {}
+class CollectionError extends CollectionState {
+  final String errorMessage;
+
+  CollectionError({required this.errorMessage});
+}
+
+class CollectionLoadingMore extends CollectionState {
+  final List<ItemModel> items;
+
+  CollectionLoadingMore(this.items);
+
+  @override
+  List<Object> get props => [items];
+}

@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 
-abstract class PaginationEvent extends Equatable {
+abstract class CollectionEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
 
-class FetchItemsEvent extends PaginationEvent {}
+class FetchItemsEvent extends CollectionEvent {}

@@ -3,24 +3,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/collection/collection_block.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/collection/collection_event.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/collection/collection_state.dart';
+import 'package:pixelfield_flutter_task/presentation/widgets/error_with_refresh_widget.dart';
 
 class ItemGridScreen extends StatelessWidget {
   const ItemGridScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PaginationBloc, PaginationState>(
+    return BlocBuilder<CollectionBloc, CollectionState>(
       builder: (context, state) {
-        if (state is PaginationLoading && state is! PaginationLoaded) {
+        if (state is CollectionLoading && state is! CollectionLoaded) {
           return const Center(child: CircularProgressIndicator());
-        } else if (state is PaginationLoaded) {
+        } else if (state is CollectionLoaded) {
           final items = state.items;
+
+          print("state.hasReachedMax = ${state.hasReachedMax}");
 
           return NotificationListener<ScrollNotification>(
             onNotification: (ScrollNotification scrollInfo) {
               if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent &&
                   !state.hasReachedMax) {
-                context.read<PaginationBloc>().add(FetchItemsEvent());
+                context.read<CollectionBloc>().add(FetchItemsEvent());
               }
               return false;
             },
@@ -31,9 +34,19 @@ class ItemGridScreen extends StatelessWidget {
                 mainAxisSpacing: 8.0,
                 childAspectRatio: 1.0,
               ),
-              itemCount: items.length,
+              itemCount: state.hasReachedMax ? items.length : items.length + 1,
               itemBuilder: (context, index) {
-                return Card(
+
+                if (index >= items.length) {
+                  if (!state.hasReachedMax) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                }
+              return Card(
                   child: Column(
                     children: [
                       Image.asset('assets/images/img_bottle.png', width: 80,
@@ -51,8 +64,14 @@ class ItemGridScreen extends StatelessWidget {
               },
             ),
           );
-        } else if (state is PaginationError) {
-          return const Center(child: Text('Error loading items'));
+        } else if (state is CollectionError) {
+          print("error ${state.errorMessage}");
+          return ErrorWithRefreshWidget(
+            errorMessage: state.errorMessage,
+            onRefresh: () {
+              context.read<CollectionBloc>().add(FetchItemsEvent());
+            },
+          );
         } else {
           return const SizedBox();
         }
