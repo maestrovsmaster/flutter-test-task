@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
 
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 class AppTheme {
   static ThemeData get theme {
     return ThemeData(
@@ -11,25 +14,46 @@ class AppTheme {
         secondary: AppColors.accentColor,
       ),
       cardColor: AppColors.cardBackground,
-      textTheme: const TextTheme(
-        displayLarge: TextStyle(
+      cardTheme: const CardTheme(
+        color: AppColors.cardBackground,
+      ),
+      textTheme: TextTheme(
+        displayLarge: GoogleFonts.ebGaramond(
           fontSize: 32,
           fontWeight: FontWeight.bold,
           color: AppColors.primaryText,
         ),
-        bodyLarge: TextStyle(
+        headlineMedium: GoogleFonts.ebGaramond(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: AppColors.primaryText,
+        ),
+        //For Card Item title
+        titleLarge: GoogleFonts.ebGaramond(
+          fontSize: 22,
+          fontWeight: FontWeight.w500,
+          color: AppColors.primaryText,
+        ),
+        bodyLarge: GoogleFonts.lato(
           fontSize: 16,
           color: AppColors.primaryText,
         ),
-        bodyMedium: TextStyle(
-          fontSize: 14,
+        //For Card Item subtitle
+        bodyMedium: GoogleFonts.lato(
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
           color: AppColors.secondaryText,
         ),
+        labelLarge: GoogleFonts.lato(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: AppColors.primaryText,
+        ),
       ),
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         backgroundColor: AppColors.background,
         elevation: 0,
-        titleTextStyle: TextStyle(
+        titleTextStyle: GoogleFonts.ebGaramond(
           color: AppColors.primaryText,
           fontSize: 20,
           fontWeight: FontWeight.bold,
@@ -42,6 +66,10 @@ class AppTheme {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
+          ),
+          textStyle: GoogleFonts.lato(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),

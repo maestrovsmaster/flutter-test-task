@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pixelfield_flutter_task/core/utils/grid_utils.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/collection/collection_block.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/collection/collection_event.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/collection/collection_state.dart';
+import 'package:pixelfield_flutter_task/presentation/widgets/collection_item.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/error_with_refresh_widget.dart';
 
 class ItemGridScreen extends StatelessWidget {
@@ -19,6 +21,7 @@ class ItemGridScreen extends StatelessWidget {
 
           print("state.hasReachedMax = ${state.hasReachedMax}");
 
+          final itemRatio = calculateChildAspectRatio(context);
           return NotificationListener<ScrollNotification>(
             onNotification: (ScrollNotification scrollInfo) {
               if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent &&
@@ -28,11 +31,11 @@ class ItemGridScreen extends StatelessWidget {
               return false;
             },
             child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 8.0,
-                mainAxisSpacing: 8.0,
-                childAspectRatio: 1.0,
+              gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 8.0,
+                  mainAxisSpacing: 8.0,
+                  childAspectRatio: itemRatio,
               ),
               itemCount: state.hasReachedMax ? items.length : items.length + 1,
               itemBuilder: (context, index) {
@@ -46,21 +49,7 @@ class ItemGridScreen extends StatelessWidget {
                     return const SizedBox.shrink();
                   }
                 }
-              return Card(
-                  child: Column(
-                    children: [
-                      Image.asset('assets/images/img_bottle.png', width: 80,
-                        height: 80,),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          items[index].name,
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
+              return CollectionItem(item: items[index]);
               },
             ),
           );

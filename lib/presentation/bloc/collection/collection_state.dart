@@ -34,11 +34,4 @@ class CollectionError extends CollectionState {
   CollectionError({required this.errorMessage});
 }
 
-class CollectionLoadingMore extends CollectionState {
-  final List<ItemModel> items;
 
-  CollectionLoadingMore(this.items);
-
-  @override
-  List<Object> get props => [items];
-}
