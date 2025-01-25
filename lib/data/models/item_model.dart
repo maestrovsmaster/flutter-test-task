@@ -1,8 +1,21 @@
-class ItemModel {
+import 'package:hive/hive.dart';
+part 'item_model.g.dart';
+
+@HiveType(typeId: 0)
+class ItemModel extends HiveObject {
+  @HiveField(0)
   final String id;
+
+  @HiveField(1)
   final String name;
+
+  @HiveField(2)
   final String imageUrl;
+
+  @HiveField(3)
   final int count;
+
+  @HiveField(4)
   final int total;
 
   ItemModel({
