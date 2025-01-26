@@ -38,8 +38,8 @@ class CollectionItem extends StatelessWidget {
               style: Theme.of(context).textTheme.titleLarge,
               textAlign: TextAlign.start,
             ),
-            const SizedBox(height: 4), // Відступ між назвою і підзаголовком
-            // Підтекст
+            const SizedBox(height: 4),
+            
             Text(
               subtitle,
               style: const TextStyle(

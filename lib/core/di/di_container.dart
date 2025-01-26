@@ -18,6 +18,8 @@ Future<void> init() async {
 
   sl.registerLazySingleton(() => AuthBloc());
 
+
+
   sl.registerLazySingleton<CollectionDataSource>(() => MockCollectionDataSource());
 
 

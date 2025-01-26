@@ -1,9 +1,12 @@
-abstract class BottleDetailsState {}
+class BottleDetailsState {
+  final int activeTab;
 
-class BottleDetailsInitial extends BottleDetailsState {}
+  BottleDetailsState({required this.activeTab});
 
-class BottleDetailsScrolling extends BottleDetailsState {
-  final double scrollPosition;
+  BottleDetailsState copyWith({int? activeTab}) {
+    return BottleDetailsState(
+      activeTab: activeTab ?? this.activeTab,
 
-  BottleDetailsScrolling(this.scrollPosition);
+    );
+  }
 }

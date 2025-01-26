@@ -23,36 +23,34 @@ class MainScreen extends StatelessWidget {
           final bloc = BlocProvider.of<MainScreenBloc>(context);
 
           return Scaffold(
-            appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(72),
-          child:
-            AppBar(
-              title: Text(_getTitle(state.selectedIndex),
-                style: Theme.of(context).textTheme.displayLarge,
-              ),
-              actions: [
-                Stack(
-                  children: [
-
-                    NotificationsWidget(
-                      hasNotifications: state.notificationCount > 0,
-                      onClick: () {
-                        print('Bell icon clicked!');
-                        // TODO: Implement notification functionality
-                      },
-                    )
-                  ],
-                ),
-              ],
-            )),
-            body: _getSelectedScreen(state.selectedIndex),
-            bottomNavigationBar: MainScreenBottomNavigationBar(
-              currentIndex: state.selectedIndex,
-              onTap: (index) {
-                bloc.add(SelectScreen(index));
-              },
-            )
-          );
+              appBar: PreferredSize(
+                  preferredSize: const Size.fromHeight(72),
+                  child: AppBar(
+                    title: Text(
+                      _getTitle(state.selectedIndex),
+                      style: Theme.of(context).textTheme.displayLarge,
+                    ),
+                    actions: [
+                      Stack(
+                        children: [
+                          NotificationsWidget(
+                            hasNotifications: state.notificationCount > 0,
+                            onClick: () {
+                              print('Bell icon clicked!');
+                              // TODO: Implement notification functionality
+                            },
+                          )
+                        ],
+                      ),
+                    ],
+                  )),
+              body: _getSelectedScreen(state.selectedIndex),
+              bottomNavigationBar: MainScreenBottomNavigationBar(
+                currentIndex: state.selectedIndex,
+                onTap: (index) {
+                  bloc.add(SelectScreen(index));
+                },
+              ));
         },
       ),
     );

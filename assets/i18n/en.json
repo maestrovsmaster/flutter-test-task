@@ -6,5 +6,9 @@
   "tab_shop": "Shop",
   "tab_settings": "Settings",
 
-  "my_collection": "My collection"
+  "my_collection": "My collection",
+
+  "tab_details": "Details",
+  "tab_tasting_notes": "Tasting Notes",
+  "tab_history": "History"
 }

@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pixelfield_flutter_task/core/theme/app_colors.dart';
 import 'package:pixelfield_flutter_task/data/models/item_model.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/bottle_details/bottle_details_block.dart';
+import 'package:pixelfield_flutter_task/presentation/bloc/bottle_details/bottle_details_event.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/bottle_details/bottle_details_state.dart';
+import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/slivers/bottle_image_delegate.dart';
+import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/slivers/popup_menu_delegate.dart';
+import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/slivers/switch_tab_delegate.dart';
+import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/tabs/tab_details.widget.dart';
+
+import 'tabs/tab_history_widget.dart';
+import 'tabs/tab_tasting_notes_widget.dart';
 
 class BottleDetailsScreen extends StatelessWidget {
   final ItemModel item;
@@ -12,22 +21,22 @@ class BottleDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => BottleDetailsBloc(),
-      child: BottleDetailsContent(item: item),
+      create: (context) => BottleDetailsBloc(),
+      child: _BottleDetailsContent(item: item),
     );
   }
 }
 
-class BottleDetailsContent extends StatefulWidget {
+class _BottleDetailsContent extends StatefulWidget {
   final ItemModel item;
 
-  const BottleDetailsContent({super.key, required this.item});
+  const _BottleDetailsContent({super.key, required this.item});
 
   @override
-  _BottleDetailsContentState createState() => _BottleDetailsContentState();
+  State<_BottleDetailsContent> createState() => _BottleDetailsContentState();
 }
 
-class _BottleDetailsContentState extends State<BottleDetailsContent> {
+class _BottleDetailsContentState extends State<_BottleDetailsContent> {
   late final ScrollController _scrollController;
 
   @override
@@ -45,72 +54,132 @@ class _BottleDetailsContentState extends State<BottleDetailsContent> {
   }
 
   void _onScroll() {
-    final position = _scrollController.position.pixels;
-    context.read<BottleDetailsBloc>().scrollUpdated(position);
+    if (mounted) {
+      final position = _scrollController.position.pixels;
+     // context.read<BottleDetailsBloc>().add(ScrollUpdatedEvent(position));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
-        controller: _scrollController,
-        slivers: [
-          SliverAppBar(
-            pinned: true,
-            expandedHeight: 72,
-            backgroundColor: Colors.black,
-            leading: Icon(Icons.arrow_back, color: Colors.white),
-            title: Text('Genesis Collection', style: TextStyle(color: Colors.white)),
-            actions: [
-              IconButton(
-                icon: Icon(Icons.close, color: Colors.white),
-                onPressed: () => Navigator.pop(context),
-              )
-            ],
-          ),
-          SliverToBoxAdapter(
-            child: BlocBuilder<BottleDetailsBloc, BottleDetailsState>(
-              builder: (context, state) {
-                double opacity = 1.0; // Default opacity
-                if (state is BottleDetailsScrolling) {
-                  opacity = (1 - state.scrollPosition / 100).clamp(0.0, 1.0);
-                }
+    return BlocBuilder<BottleDetailsBloc, BottleDetailsState>(
+      builder: (context, state) {
 
-                return Opacity(
-                  opacity: opacity,
-                  child: Container(
-                    height: 100,
-                    color: Colors.orange,
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Genuine Bottle (Unopened)',
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+        int currentTab = 0;
+        currentTab = state.activeTab;
+
+        return Scaffold(
+          backgroundColor: AppColors.backgroundBottleDetails,
+          body: Stack(
+            children: [
+
+              SizedBox.expand(
+                child: Image.asset(
+                  'assets/images/img_bottle_background.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Column(
+                children: [
+
+                  PreferredSize(
+                    preferredSize: const Size.fromHeight(72),
+                    child: AppBar(
+                      backgroundColor: Colors.transparent,
+                      title: const Text(
+                        'Genesis Collection',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      actions: [
+                        IconButton(
+                          icon: const Icon(Icons.close, color: Colors.white),
+                          onPressed: () => Navigator.pop(context),
+                        )
+                      ],
                     ),
                   ),
-                );
-              },
-            ),
+
+
+                  Expanded(
+                    child: CustomScrollView(
+                      controller: _scrollController,
+                      slivers: [
+
+                        SliverPersistentHeader(
+                          pinned: true,
+                          delegate: PopupMenuDelegate(
+                            currentHeight: 40,
+                            minHeight: 0,
+                            maxHeight: 40,
+                          ),
+                        ),
+
+
+                        SliverPersistentHeader(
+                          pinned: true,
+                          delegate: BottleImageDelegate(
+                            currentHeight: 350.0,
+                            minHeight: 0.0,
+                            maxHeight: 350.0,
+                          ),
+                        ),
+
+
+                        SliverPadding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          sliver: SliverPersistentHeader(
+                            pinned: true,
+                            delegate: SwitchTabDelegate(
+                              currentHeight: 204,
+                              minHeight: 204,
+                              maxHeight: 204,
+                              title: "Talisker 18 Year Old",
+                              subtitle: "#2504",
+                              currentTab: currentTab,
+                              onTabSelected: (selectedIndex) {
+                                context
+                                    .read<BottleDetailsBloc>()
+                                    .add(SwitchTabEvent(selectedIndex));
+                              },
+                            ),
+                          )
+                        )
+                        ,
+
+                    SliverPadding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      sliver:
+                        SliverToBoxAdapter(
+                          child: Builder(
+                            builder: (context) {
+                              if (state is BottleDetailsState) {
+                                switch (state.activeTab) {
+                                  case 0:
+                                    return TabDetailsWidget();
+                                  case 1:
+                                    return TabTastingNotesWidget();
+                                  case 2:
+                                    return TabHistoryWidget();
+                                  default:
+                                    return Container();
+                                }
+                              }
+                              return Container();
+                            },
+                          ),
+                        )),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-          SliverToBoxAdapter(
-            child: Container(
-              height: 300,
-              color: Colors.blue,
-              alignment: Alignment.center,
-              child: Text('Bottle Image Placeholder',
-                  style: TextStyle(fontSize: 20, color: Colors.white)),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              height: 600,
-              color: Colors.green,
-              alignment: Alignment.center,
-              child: Text('Details, Tasting Notes, History Placeholder',
-                  style: TextStyle(fontSize: 20, color: Colors.white)),
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
+
+
+

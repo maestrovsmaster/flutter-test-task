@@ -6,5 +6,9 @@
   "tab_shop": "Obchod",
   "tab_settings": "Nastavení",
 
-  "my_collection": "Moje sbírka"
+  "my_collection": "Moje sbírka",
+
+  "tab_details": "Detaily",
+  "tab_tasting_notes": "Degustační poznámky",
+  "tab_history": "Historie"
 }
