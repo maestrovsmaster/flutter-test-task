@@ -5,6 +5,7 @@ import 'package:pixelfield_flutter_task/data/datasource/mock_collection_datasour
 import 'package:pixelfield_flutter_task/data/models/item_model.dart';
 import 'package:pixelfield_flutter_task/domain/repositories/collection_repository.dart';
 import 'package:pixelfield_flutter_task/domain/repositories/local_collection_repository.dart';
+import 'package:pixelfield_flutter_task/presentation/bloc/auth/auth_block.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/collection/collection_block.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/collection/collection_event.dart';
 
@@ -14,6 +15,8 @@ Future<void> init() async {
 
   final itemBox = await Hive.openBox<ItemModel>('item_model_box');
   sl.registerLazySingleton<Box<ItemModel>>(() => itemBox);
+
+  sl.registerLazySingleton(() => AuthBloc());
 
   sl.registerLazySingleton<CollectionDataSource>(() => MockCollectionDataSource());
 
