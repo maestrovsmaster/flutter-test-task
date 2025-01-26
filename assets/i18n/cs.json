@@ -1,4 +1,10 @@
 {
-  "error_no_connection": "No internet connection",
-  "button_refresh": "Refresh"
+  "error_no_connection": "Žádné připojení k internetu",
+  "button_refresh": "Obnovit",
+  "tab_scan": "Skenovat",
+  "tab_collection": "Sbírka",
+  "tab_shop": "Obchod",
+  "tab_settings": "Nastavení",
+
+  "my_collection": "Moje sbírka"
 }

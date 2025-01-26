@@ -1,4 +1,10 @@
 {
   "error_no_connection": "No internet connection",
-  "button_refresh": "Refresh"
+  "button_refresh": "Refresh",
+  "tab_scan": "Scan",
+  "tab_collection": "Collection",
+  "tab_shop": "Shop",
+  "tab_settings": "Settings",
+
+  "my_collection": "My collection"
 }

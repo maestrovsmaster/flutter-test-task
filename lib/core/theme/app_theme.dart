@@ -18,9 +18,10 @@ class AppTheme {
         color: AppColors.cardBackground,
       ),
       textTheme: TextTheme(
+        //For Title
         displayLarge: GoogleFonts.ebGaramond(
           fontSize: 32,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w500,
           color: AppColors.primaryText,
         ),
         headlineMedium: GoogleFonts.ebGaramond(
@@ -72,6 +73,23 @@ class AppTheme {
             fontWeight: FontWeight.bold,
           ),
         ),
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: AppColors.background,
+        selectedItemColor: AppColors.tabActive,
+        unselectedItemColor: AppColors.tabInactive,
+        type: BottomNavigationBarType.fixed,
+        selectedLabelStyle: GoogleFonts.lato(
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
+          color: AppColors.accentColor,
+        ),
+        unselectedLabelStyle: GoogleFonts.lato(
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
+          color: AppColors.tabInactive,
+        ),
+
       ),
     );
   }

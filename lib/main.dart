@@ -7,6 +7,7 @@ import 'package:pixelfield_flutter_task/core/theme/app_theme.dart';
 import 'package:pixelfield_flutter_task/data/models/item_model.dart';
 import 'core/di/di_container.dart' as di;
 import 'presentation/bloc/collection/collection_block.dart';
+import 'presentation/screens/main_screen/main_screen.dart';
 import 'presentation/screens/my_collection/collection_screen.dart';
 
 Future<void> main() async {
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.theme,
       home: BlocProvider(
         create: (context) => di.sl<CollectionBloc>(),
-        child: const ItemGridScreen(),
+        child:  MainScreen(),
       ),
     );
   }

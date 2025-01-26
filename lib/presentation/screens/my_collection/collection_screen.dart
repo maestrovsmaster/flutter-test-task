@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pixelfield_flutter_task/core/utils/grid_utils.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/collection/collection_block.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/collection/collection_event.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/collection/collection_state.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/collection_item.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/error_with_refresh_widget.dart';
 
-class ItemGridScreen extends StatelessWidget {
-  const ItemGridScreen({super.key});
+class CollectionScreen extends StatelessWidget {
+  const CollectionScreen({super.key});
+
+  static const  itemCardSizeRatio = 1.86;
+  static const  crossAxisSpacing = 8.0;
+  static const   horizontalPadding = 16.0;
+  static const   crossAxisCount = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -24,22 +28,23 @@ class ItemGridScreen extends StatelessWidget {
           final itemRatio = calculateChildAspectRatio(context);
           return NotificationListener<ScrollNotification>(
             onNotification: (ScrollNotification scrollInfo) {
-              if (scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent &&
+              if (scrollInfo.metrics.pixels ==
+                      scrollInfo.metrics.maxScrollExtent &&
                   !state.hasReachedMax) {
                 context.read<CollectionBloc>().add(FetchItemsEvent());
               }
               return false;
             },
             child: GridView.builder(
-              gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 8.0,
-                  mainAxisSpacing: 8.0,
-                  childAspectRatio: itemRatio,
+              padding: const EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: horizontalPadding),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                crossAxisSpacing: crossAxisSpacing,
+                mainAxisSpacing: crossAxisSpacing,
+                childAspectRatio: itemRatio,
               ),
               itemCount: state.hasReachedMax ? items.length : items.length + 1,
               itemBuilder: (context, index) {
-
                 if (index >= items.length) {
                   if (!state.hasReachedMax) {
                     return const Center(
@@ -49,7 +54,7 @@ class ItemGridScreen extends StatelessWidget {
                     return const SizedBox.shrink();
                   }
                 }
-              return CollectionItem(item: items[index]);
+                return CollectionItem(item: items[index]);
               },
             ),
           );
@@ -67,4 +72,13 @@ class ItemGridScreen extends StatelessWidget {
       },
     );
   }
+
+  double calculateChildAspectRatio(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    const totalSpacing = (crossAxisCount - 1) * crossAxisSpacing + crossAxisCount * horizontalPadding;
+    final itemWidth = (screenWidth - totalSpacing) / crossAxisCount;
+    final itemHeight = itemWidth * itemCardSizeRatio;
+    return itemWidth / itemHeight;
+  }
+
 }

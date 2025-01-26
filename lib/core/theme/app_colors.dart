@@ -8,4 +8,12 @@ class AppColors {
   static const Color primaryText = Color(0xFFE7E9EA);
   static const Color secondaryText = Color(0xFFD7D5D1);
   static const Color errorColor = Color(0xFFB63D3D);
+
+  static const Color tabActive = Color(0xFFFFFFFF);
+  static const Color tabInactive = Color(0xFF899194);
+  static const Color tabBackground = Color(0xFF0B1519);
+
+
+
+
 }
