@@ -1,4 +1,11 @@
 {
+
+  "welcome_title": "Vítejte!",
+  "welcome_subtitle": "Text text text",
+  "scan_bottle": "Naskenujte láhev",
+  "have_account": "Máte účet?",
+  "sign_in_first": "Přihlaste se nejprve",
+
   "error_no_connection": "Žádné připojení k internetu",
   "button_refresh": "Obnovit",
   "tab_scan": "Skenovat",

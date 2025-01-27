@@ -11,7 +11,7 @@ import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/sliv
 import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/slivers/switch_tab_delegate.dart';
 import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/tabs/details/tab_details.widget.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/close_icon_widget.dart';
-import 'package:pixelfield_flutter_task/presentation/widgets/custom_yellow_button.dart';
+import 'package:pixelfield_flutter_task/presentation/widgets/custom_yellow_icon_button.dart';
 
 import 'tabs/history/tab_history_widget.dart';
 import 'tabs/tasting_notes/tab_tasting_notes_widget.dart';
@@ -185,7 +185,7 @@ class _BottleDetailsContentState extends State<_BottleDetailsContent> {
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 24.0),
                   child: IntrinsicWidth(
-                    child: CustomYellowButton(
+                    child: CustomYellowIconButton(
                       icon: Icons.add,
                       text: "Add to my collection",
                       onPressed: () {

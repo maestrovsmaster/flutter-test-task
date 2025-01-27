@@ -1,22 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:pixelfield_flutter_task/core/theme/app_colors.dart';
 
-class CustomYellowButton extends StatelessWidget {
-  final IconData icon;
+class CustomYellowIconButton extends StatelessWidget {
+  final IconData? icon;
   final String text;
   final VoidCallback onPressed;
+  final double height;
 
-  const CustomYellowButton({
+  const CustomYellowIconButton({
     super.key,
-    required this.icon,
+    this.icon,
     required this.text,
     required this.onPressed,
+    this.height = 40,
   });
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> children = [];
+    if (icon != null) {
+      children.add(Icon(icon, color: AppColors.backgroundBottleDetails));
+      children.add(const SizedBox(width: 16));
+    }
+    children.add(Text(
+      text,
+      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            color: AppColors.backgroundBottleDetails,
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+    ));
+
     return SizedBox(
-      height: 40,
+      height: height,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
@@ -29,20 +45,11 @@ class CustomYellowButton extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: AppColors.backgroundBottleDetails),
-            const SizedBox(width: 16),
-            Text(
-              text,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: AppColors.backgroundBottleDetails,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ],
+          children: children,
         ),
       ),
     );
   }
+
+
 }
