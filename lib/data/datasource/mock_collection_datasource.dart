@@ -29,7 +29,7 @@ class MockCollectionDataSource implements CollectionDataSource {
       (index) {
         final itemIndex = startIndex + index;
         return generateMockItem(
-            'id_$itemIndex', 'Springbank 1992 #$itemIndex', 1992);
+            'id_$itemIndex', 'Springbank', 1994);
       },
     );
   }

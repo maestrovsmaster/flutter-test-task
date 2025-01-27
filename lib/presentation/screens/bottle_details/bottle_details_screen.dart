@@ -130,11 +130,10 @@ class _BottleDetailsContentState extends State<_BottleDetailsContent> {
                           sliver: SliverPersistentHeader(
                             pinned: true,
                             delegate: SwitchTabDelegate(
-                              currentHeight: 204,
-                              minHeight: 204,
-                              maxHeight: 204,
-                              title: "Talisker 18 Year Old",
-                              subtitle: "#2504",
+                              item: widget.item,
+                             // currentHeight: 244,
+                             // minHeight: 240maxHeight: 520,
+
                               currentTab: currentTab,
                               onTabSelected: (selectedIndex) {
                                 context

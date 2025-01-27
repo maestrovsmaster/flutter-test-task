@@ -10,5 +10,8 @@
 
   "tab_details": "Details",
   "tab_tasting_notes": "Tasting Notes",
-  "tab_history": "History"
+  "tab_history": "History",
+
+  "year_old": "{age} Year old",
+  "bottle": "Bottle {number}/{total}"
 }

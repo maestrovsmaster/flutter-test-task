@@ -102,7 +102,7 @@ class ItemModel extends HiveObject {
     if (json['id'] == null) {
       throw Exception("Missing required field: id");
     }
-    if (  json['name'] == null) {
+    if (json['name'] == null) {
       throw Exception("Missing required field: name");
     }
     return ItemModel(

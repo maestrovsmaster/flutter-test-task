@@ -5,6 +5,7 @@ class HighlightedTextWidget extends StatelessWidget {
   final String text1;
   final String? textYellow;
   final String text2;
+  final int maxLines = 1;
 
   const HighlightedTextWidget({
     super.key,
@@ -18,24 +19,38 @@ class HighlightedTextWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        RichText(
-          text: TextSpan(
-            style: Theme.of(context).textTheme.displayLarge?.copyWith(
-              color: Colors.white,
-            ),
-            children: [
-              TextSpan(
-                text: text1,
-              ),
-              if (textYellow != null)
-                TextSpan(
-                  text: textYellow,
-                  style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                    color: AppColors.accentColor,
+        LayoutBuilder(
+          builder: (context, constraints) {
+            return Wrap(
+              crossAxisAlignment: WrapCrossAlignment.start,
+              spacing: 8,
+              children: [
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: constraints.maxWidth * 0.8),
+                  child: RichText(
+                    maxLines: maxLines,
+                    overflow: TextOverflow.ellipsis,
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                        color: Colors.white,
+                      ),
+                      text: text1,
+                    ),
                   ),
                 ),
-            ],
-          ),
+                if (textYellow != null)
+                  RichText(
+                    textAlign: TextAlign.end,
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                        color: AppColors.accentColor,
+                      ),
+                      text: textYellow,
+                    ),
+                  ),
+              ],
+            );
+          },
         ),
         Text(
           text2,
@@ -45,5 +60,6 @@ class HighlightedTextWidget extends StatelessWidget {
         ),
       ],
     );
+
   }
 }

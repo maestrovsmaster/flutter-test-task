@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final itemModel = generateMockItem(
-        'id_0', 'Springbank 1992', 1992);
+        'id_0', 'Springbank', 1992);
 
     return MaterialApp(
       title: 'Pixelfield Flutter Task',

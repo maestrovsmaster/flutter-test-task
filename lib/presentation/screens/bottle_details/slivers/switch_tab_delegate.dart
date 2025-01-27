@@ -3,25 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:pixelfield_flutter_task/core/theme/app_colors.dart';
+import 'package:pixelfield_flutter_task/core/utils/utils.dart';
+import 'package:pixelfield_flutter_task/data/models/item_model.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/highlighted_text_widget.dart';
 
 typedef TabSelectedCallback = void Function(int selectedIndex);
 
 class SwitchTabDelegate extends SliverPersistentHeaderDelegate {
-  final double currentHeight;
-  final double minHeight;
-  final double maxHeight;
-  final String title;
-  final String subtitle;
+  final ItemModel item;
+
+
+  final double height = 200;
+
   final int currentTab;
   final TabSelectedCallback onTabSelected;
 
   SwitchTabDelegate({
-    required this.currentHeight,
-    required this.minHeight,
-    required this.maxHeight,
-    required this.title,
-    required this.subtitle,
+    required this.item,
     required this.currentTab,
     required this.onTabSelected,
   });
@@ -29,30 +27,45 @@ class SwitchTabDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
+    final bottlesText = item.count != null
+        ? translate('bottle', args: {
+            'number': item.count.toString(),
+            'total': item.total != null ? item.total.toString() : ''
+          })
+        : "";
+
+    final title = item.name;
+    final vineAge = item.year != null
+        ? translate('year_old',
+            args: {'age': calculateWineAge(item.year!).toString()})
+        : "";
+    final batchNumber = item.batchNumber != null ? "#${item.batchNumber}" : "";
+
     return SizedBox(
         width: double.infinity,
-        height: 204,
+        height: height,
         child: Container(
           color: AppColors.cardBackground,
           padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               Text(
-                subtitle,
-                style:  Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: AppColors.secondaryText2,
-                ),
+                bottlesText,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppColors.secondaryText2,
+                    ),
               ),
-              SizedBox(height: 8,),
+              const SizedBox(
+                height: 8,
+              ),
+
               HighlightedTextWidget(
-                text1: "Talisker ",
-                textYellow: "18 Year old",
-                text2: "#2504",
+                text1: "$title ",
+                textYellow: vineAge,
+                text2: batchNumber,
               ),
               const SizedBox(height: 4),
-
               const SizedBox(height: 16),
               Container(
                   decoration: BoxDecoration(
@@ -101,10 +114,10 @@ class SwitchTabDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => maxHeight;
+  double get maxExtent => height;
 
   @override
-  double get minExtent => minHeight;
+  double get minExtent => height;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {

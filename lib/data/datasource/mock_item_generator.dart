@@ -11,7 +11,7 @@ ItemModel generateMockItem(String id, String name, int year) {
     count: 10,
     total: 100,
     year: year,
-    batchNumber: 1,
+    batchNumber: 1234,
     distillery: "Mock Distillery",
     region: "Mock Region",
     country: "Mock Country",

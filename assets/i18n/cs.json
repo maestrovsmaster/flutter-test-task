@@ -10,5 +10,8 @@
 
   "tab_details": "Detaily",
   "tab_tasting_notes": "Degustační poznámky",
-  "tab_history": "Historie"
+  "tab_history": "Historie",
+
+  "year_old": "{age} let staré",
+  "bottle": "Lahev {number}/{total}"
 }
