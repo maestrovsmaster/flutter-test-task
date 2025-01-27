@@ -39,7 +39,7 @@ class CollectionItem extends StatelessWidget {
               textAlign: TextAlign.start,
             ),
             const SizedBox(height: 4),
-            
+
             Text(
               subtitle,
               style: const TextStyle(

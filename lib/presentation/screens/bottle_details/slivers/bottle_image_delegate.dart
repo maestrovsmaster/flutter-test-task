@@ -14,19 +14,17 @@ class BottleImageDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    final imageHeight = 0.8*maxHeight;
     return Container(
       color: Colors.transparent,
       alignment: Alignment.center,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 100),
-        height: currentHeight,
-        alignment: Alignment.center,
-        child: SizedBox(
-          height: maxHeight,
+      child: ClipRect(
+        child: OverflowBox(
+          maxHeight: imageHeight,
+          alignment: Alignment.center,
           child: Image.asset(
             'assets/images/img_bottle.png',
             fit: BoxFit.contain,
-            width: double.infinity,
           ),
         ),
       ),

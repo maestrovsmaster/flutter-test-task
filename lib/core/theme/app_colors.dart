@@ -8,6 +8,7 @@ class AppColors {
   static const Color accentColor = Color(0xFFD49A00);
   static const Color primaryText = Color(0xFFE7E9EA);
   static const Color secondaryText = Color(0xFFD7D5D1);
+  static const Color secondaryText2 = Color(0xFFB8BDBF);
   static const Color errorColor = Color(0xFFB63D3D);
 
   static const Color tabActive = Color(0xFFFFFFFF);
