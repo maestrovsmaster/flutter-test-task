@@ -8,10 +8,10 @@ import 'package:pixelfield_flutter_task/presentation/bloc/bottle_details/bottle_
 import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/slivers/bottle_image_delegate.dart';
 import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/slivers/popup_menu_delegate.dart';
 import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/slivers/switch_tab_delegate.dart';
-import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/tabs/tab_details.widget.dart';
+import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/tabs/details/tab_details.widget.dart';
 
-import 'tabs/tab_history_widget.dart';
-import 'tabs/tab_tasting_notes_widget.dart';
+import 'tabs/history/tab_history_widget.dart';
+import 'tabs/tasting_notes/tab_tasting_notes_widget.dart';
 
 class BottleDetailsScreen extends StatelessWidget {
   final ItemModel item;
@@ -30,7 +30,7 @@ class BottleDetailsScreen extends StatelessWidget {
 class _BottleDetailsContent extends StatefulWidget {
   final ItemModel item;
 
-  const _BottleDetailsContent({super.key, required this.item});
+  const _BottleDetailsContent({required this.item});
 
   @override
   State<_BottleDetailsContent> createState() => _BottleDetailsContentState();
@@ -55,8 +55,7 @@ class _BottleDetailsContentState extends State<_BottleDetailsContent> {
 
   void _onScroll() {
     if (mounted) {
-      final position = _scrollController.position.pixels;
-     // context.read<BottleDetailsBloc>().add(ScrollUpdatedEvent(position));
+      //final position = _scrollController.position.pixels;
     }
   }
 
@@ -151,19 +150,16 @@ class _BottleDetailsContentState extends State<_BottleDetailsContent> {
                         SliverToBoxAdapter(
                           child: Builder(
                             builder: (context) {
-                              if (state is BottleDetailsState) {
-                                switch (state.activeTab) {
-                                  case 0:
-                                    return TabDetailsWidget(item: widget.item,);
-                                  case 1:
-                                    return TabTastingNotesWidget();
-                                  case 2:
-                                    return TabHistoryWidget();
-                                  default:
-                                    return Container();
-                                }
+                              switch (state.activeTab) {
+                                case 0:
+                                  return TabDetailsWidget(item: widget.item,);
+                                case 1:
+                                  return TabTastingNotesWidget(item: widget.item, scrollController: _scrollController,);
+                                case 2:
+                                  return TabHistoryWidget();
+                                default:
+                                  return Container();
                               }
-                              return Container();
                             },
                           ),
                         )),

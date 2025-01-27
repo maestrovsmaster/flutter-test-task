@@ -13,5 +13,12 @@
   "tab_history": "History",
 
   "year_old": "{age} Year old",
-  "bottle": "Bottle {number}/{total}"
+  "bottle": "Bottle {number}/{total}",
+
+  "tasting_notes": "Tasting notes",
+  "by_charles_mac_lean": "by Charles MacLean MBE",
+  "your_notes": "Your notes",
+  "nose": "Nose",
+  "palate": "Palate",
+  "finish": "Finish"
 }

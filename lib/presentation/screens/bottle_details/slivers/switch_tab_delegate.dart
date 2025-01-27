@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:pixelfield_flutter_task/core/theme/app_colors.dart';
 import 'package:pixelfield_flutter_task/core/utils/utils.dart';
@@ -65,11 +63,11 @@ class SwitchTabDelegate extends SliverPersistentHeaderDelegate {
                 textYellow: vineAge,
                 text2: batchNumber,
               ),
-              const SizedBox(height: 4),
-              const SizedBox(height: 16),
+
+              const SizedBox(height: 24),
               Container(
                   decoration: BoxDecoration(
-                    color: AppColors.backgroundBottleDetails,
+                    color: AppColors.background,
                     borderRadius: BorderRadius.circular(6.0),
                   ),
                   child: Row(

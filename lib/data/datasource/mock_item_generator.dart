@@ -23,9 +23,9 @@ ItemModel generateMockItem(String id, String name, int year) {
     abv: 40.0,
     size: "750ml",
     finish: "Sherry",
-    videoUrl: "https://example.com/video.mp4",
+    videoUrl: "https://www.youtube.com/watch?v=GQyWIur03aw&ab_channel=HeyFlutter%E2%80%A4com",
     officialNotes: TastingNotes(
-      nose: "Sweet and fruity",
+      nose: "A delightful bouquet of sweet and fruity notes, with hints of ripe apples, juicy peaches, and a subtle touch of tropical mango.",
       palate: "Rich and smooth",
       finish: "Long and warming",
     ),

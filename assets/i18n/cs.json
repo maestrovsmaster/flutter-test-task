@@ -13,5 +13,12 @@
   "tab_history": "Historie",
 
   "year_old": "{age} let staré",
-  "bottle": "Lahev {number}/{total}"
+  "bottle": "Lahev {number}/{total}",
+
+  "tasting_notes": "Tasting notes",
+  "by_charles_mac_lean": "by Charles MacLean MBE",
+  "your_notes": "Your notes",
+  "nose": "Nose",
+  "palate": "Palate",
+  "finish": "Finish"
 }
