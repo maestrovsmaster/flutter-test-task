@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pixelfield_flutter_task/core/di/di_container.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/collection/collection_block.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/collection/collection_event.dart';
@@ -58,7 +59,9 @@ class CollectionScreen extends StatelessWidget {
                         return const SizedBox.shrink();
                       }
                     }
-                    return CollectionItem(item: items[index]);
+                    return CollectionItem(item: items[index], onTap: (item) {
+                      context.push('/details', extra: item);
+                    });
                   },
                 ),
               );

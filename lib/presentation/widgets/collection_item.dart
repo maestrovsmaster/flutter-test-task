@@ -3,18 +3,26 @@ import 'package:pixelfield_flutter_task/data/models/item_model.dart';
 
 class CollectionItem extends StatelessWidget {
   final ItemModel item;
+  final Function(ItemModel) onTap;
 
   const CollectionItem({
-    Key? key,
-    required this.item,
-  }) : super(key: key);
+    super.key,
+    required this.item, required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
 
+    final year = item.year != null ? "${item.year}" : "";
+    final batch = item.batchNumber != null ? "${item.batchNumber}" : "";
+    final title = "${item.name}\n$year #$batch";
     final subtitle = "(${item.count} / ${item.total})";
 
-    return Card(
+    return InkWell(
+      onTap: () {
+       onTap(item);
+      },
+      child: Card(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.zero,
       ),
@@ -34,24 +42,23 @@ class CollectionItem extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              item.name,
+              title,
               style: Theme.of(context).textTheme.titleLarge,
               textAlign: TextAlign.start,
             ),
             const SizedBox(height: 4),
 
+
+
             Text(
               subtitle,
-              style: const TextStyle(
-                fontSize: 14,
-                color: Colors.grey,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.start,
             ),
           ],
         ),
       ),
-    );
+    ));
   }
 }
 

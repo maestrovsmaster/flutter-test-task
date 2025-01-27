@@ -5,13 +5,15 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:pixelfield_flutter_task/core/theme/app_theme.dart';
 import 'package:pixelfield_flutter_task/data/models/item_model.dart';
-import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/bottle_details_screen.dart';
+import 'package:pixelfield_flutter_task/presentation/screens/main_screen/main_screen.dart';
 import 'core/di/di_container.dart' as di;
 import 'data/datasource/mock_item_generator.dart';
 import 'presentation/bloc/auth/auth_block.dart';
 import 'presentation/bloc/auth/auth_event.dart';
 import 'presentation/bloc/observer/block_observer.dart';
 import 'package:intl/date_symbol_data_local.dart';
+
+import 'presentation/navigation/app_router.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,10 +42,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final itemModel = generateMockItem(
-        'id_0', 'Springbank', 1992);
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => di.sl<AuthBloc>()..add(CheckAuthStatusEvent()),
+        ),
+      ],
+      child: MaterialApp.router(
+        title: 'Pixelfield Flutter Task',
+        theme: AppTheme.theme,
+        debugShowCheckedModeBanner: false,
+        routerConfig: AppRouter().router, // Використовуємо GoRouter
+      ),
+    );
 
-    return MaterialApp(
+   // final itemModel = generateMockItem(
+    //    'id_0', 'Springbank', 1992);
+
+    /*return MaterialApp(
       title: 'Pixelfield Flutter Task',
       theme: AppTheme.theme,
       debugShowCheckedModeBanner: false,
@@ -55,11 +71,11 @@ class MyApp extends StatelessWidget {
 
         ],
 
-        //child:  const MainScreen(),
+        child:  const MainScreen(),
 
-        child: BottleDetailsScreen(item: itemModel)
+       // child: BottleDetailsScreen(item: itemModel)
       ),
-    );
+    );*/
   }
 }
 

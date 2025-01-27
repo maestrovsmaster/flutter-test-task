@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pixelfield_flutter_task/core/theme/app_colors.dart';
 import 'package:pixelfield_flutter_task/data/models/history_event.dart';
 import 'package:pixelfield_flutter_task/data/models/item_model.dart';
-import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/tabs/details/history_widgets/timeline_widget.dart';
+import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/tabs/history/history_widgets/history_widgets.dart';
+import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/tabs/history/history_widgets/timeline_widget.dart';
 
-import '../details/history_widgets/history_widgets.dart';
 
 class TabHistoryWidget extends StatelessWidget {
   final ItemModel item;
