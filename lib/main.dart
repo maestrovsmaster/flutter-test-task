@@ -10,10 +10,7 @@ import 'core/di/di_container.dart' as di;
 import 'data/datasource/mock_item_generator.dart';
 import 'presentation/bloc/auth/auth_block.dart';
 import 'presentation/bloc/auth/auth_event.dart';
-import 'presentation/bloc/collection/collection_block.dart';
 import 'presentation/bloc/observer/block_observer.dart';
-import 'presentation/screens/main_screen/main_screen.dart';
-import 'presentation/screens/my_collection/collection_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,13 +49,11 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => di.sl<AuthBloc>()..add(CheckAuthStatusEvent()),
           ),
-         /* BlocProvider<FlavorBloc>(
-            create: (_) => FlavorBloc(),
-          )*/
+
         ],
 
         //child:  const MainScreen(),
-        //  child:  GenuineBottleScreen()
+
         child: BottleDetailsScreen(item: itemModel)
       ),
     );

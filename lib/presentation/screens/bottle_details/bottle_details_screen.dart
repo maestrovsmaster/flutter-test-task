@@ -154,7 +154,7 @@ class _BottleDetailsContentState extends State<_BottleDetailsContent> {
                               if (state is BottleDetailsState) {
                                 switch (state.activeTab) {
                                   case 0:
-                                    return TabDetailsWidget();
+                                    return TabDetailsWidget(item: widget.item,);
                                   case 1:
                                     return TabTastingNotesWidget();
                                   case 2:

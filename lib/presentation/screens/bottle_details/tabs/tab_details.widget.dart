@@ -1,18 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:pixelfield_flutter_task/core/theme/app_colors.dart';
+import 'package:pixelfield_flutter_task/data/models/item_model.dart';
 
 class TabDetailsWidget extends StatelessWidget {
-  const TabDetailsWidget({super.key});
+  final ItemModel item;
+
+  const TabDetailsWidget({
+    super.key,
+    required this.item,
+  });
 
   @override
   Widget build(BuildContext context) {
+
+    final Map<String, dynamic> itemDetails = {
+      'Distillery': item.distillery ?? '',
+      'Region': item.region ?? '',
+      'Country': item.country ?? '',
+      'Type': item.type ?? '',
+      'Age Statement': item.ageStatement ?? '',
+      'Filled': item.filled ?? '',
+      'Bottled': item.bottled ?? '',
+      'Cask Number': item.caskNumber ?? '',
+      'ABV': item.abv ?? '',
+      'Size': item.size ?? '',
+      'Finish': item.finish ?? '',
+    };
+
     return Container(
-      height: 1000,
       color: AppColors.cardBackground,
-      alignment: Alignment.center,
-      child: const Text(
-        'Details Tab Content',
-        style: TextStyle(fontSize: 24, color: Colors.white),
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: itemDetails.entries.map((entry) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  entry.key,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: AppColors.white,
+                  ),
+                ),
+                Flexible(
+                  child: Text(
+                    entry.value.toString(),
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppColors.secondaryText2,
+                    ),
+                    textAlign: TextAlign.end,
+                  ),
+                ),
+              ],
+            ),
+          );
+        }).toList(),
       ),
     );
   }

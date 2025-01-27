@@ -35,8 +35,10 @@ class AppTheme {
           fontWeight: FontWeight.w500,
           color: AppColors.primaryText,
         ),
+        //For item details keys
         bodyLarge: GoogleFonts.lato(
           fontSize: 16,
+          fontWeight: FontWeight.w400,
           color: AppColors.primaryText,
         ),
         //For Card Item subtitle
