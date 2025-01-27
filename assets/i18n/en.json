@@ -1,0 +1,24 @@
+{
+  "error_no_connection": "No internet connection",
+  "button_refresh": "Refresh",
+  "tab_scan": "Scan",
+  "tab_collection": "Collection",
+  "tab_shop": "Shop",
+  "tab_settings": "Settings",
+
+  "my_collection": "My collection",
+
+  "tab_details": "Details",
+  "tab_tasting_notes": "Tasting Notes",
+  "tab_history": "History",
+
+  "year_old": "{age} Year old",
+  "bottle": "Bottle {number}/{total}",
+
+  "tasting_notes": "Tasting notes",
+  "by_charles_mac_lean": "by Charles MacLean MBE",
+  "your_notes": "Your notes",
+  "nose": "Nose",
+  "palate": "Palate",
+  "finish": "Finish"
+}

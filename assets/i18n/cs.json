@@ -1,0 +1,24 @@
+{
+  "error_no_connection": "Žádné připojení k internetu",
+  "button_refresh": "Obnovit",
+  "tab_scan": "Skenovat",
+  "tab_collection": "Sbírka",
+  "tab_shop": "Obchod",
+  "tab_settings": "Nastavení",
+
+  "my_collection": "Moje sbírka",
+
+  "tab_details": "Detaily",
+  "tab_tasting_notes": "Degustační poznámky",
+  "tab_history": "Historie",
+
+  "year_old": "{age} let staré",
+  "bottle": "Lahev {number}/{total}",
+
+  "tasting_notes": "Tasting notes",
+  "by_charles_mac_lean": "by Charles MacLean MBE",
+  "your_notes": "Your notes",
+  "nose": "Nose",
+  "palate": "Palate",
+  "finish": "Finish"
+}
