@@ -9,6 +9,7 @@ import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/sliv
 import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/slivers/popup_menu_delegate.dart';
 import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/slivers/switch_tab_delegate.dart';
 import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/tabs/details/tab_details.widget.dart';
+import 'package:pixelfield_flutter_task/presentation/widgets/custom_yellow_button.dart';
 
 import 'tabs/history/tab_history_widget.dart';
 import 'tabs/tasting_notes/tab_tasting_notes_widget.dart';
@@ -63,7 +64,6 @@ class _BottleDetailsContentState extends State<_BottleDetailsContent> {
   Widget build(BuildContext context) {
     return BlocBuilder<BottleDetailsBloc, BottleDetailsState>(
       builder: (context, state) {
-
         int currentTab = 0;
         currentTab = state.activeTab;
 
@@ -71,7 +71,6 @@ class _BottleDetailsContentState extends State<_BottleDetailsContent> {
           backgroundColor: AppColors.backgroundBottleDetails,
           body: Stack(
             children: [
-
               SizedBox.expand(
                 child: Image.asset(
                   'assets/images/img_bottle_background.png',
@@ -80,7 +79,6 @@ class _BottleDetailsContentState extends State<_BottleDetailsContent> {
               ),
               Column(
                 children: [
-
                   PreferredSize(
                     preferredSize: const Size.fromHeight(72),
                     child: AppBar(
@@ -97,13 +95,10 @@ class _BottleDetailsContentState extends State<_BottleDetailsContent> {
                       ],
                     ),
                   ),
-
-
                   Expanded(
                     child: CustomScrollView(
                       controller: _scrollController,
                       slivers: [
-
                         SliverPersistentHeader(
                           pinned: true,
                           delegate: PopupMenuDelegate(
@@ -112,8 +107,6 @@ class _BottleDetailsContentState extends State<_BottleDetailsContent> {
                             maxHeight: 40,
                           ),
                         ),
-
-
                         SliverPersistentHeader(
                           pinned: true,
                           delegate: BottleImageDelegate(
@@ -122,51 +115,72 @@ class _BottleDetailsContentState extends State<_BottleDetailsContent> {
                             maxHeight: 350.0,
                           ),
                         ),
-
-
                         SliverPadding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          sliver: SliverPersistentHeader(
-                            pinned: true,
-                            delegate: SwitchTabDelegate(
-                              item: widget.item,
-                             // currentHeight: 244,
-                             // minHeight: 240maxHeight: 520,
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            sliver: SliverPersistentHeader(
+                              pinned: true,
+                              delegate: SwitchTabDelegate(
+                                item: widget.item,
+                                // currentHeight: 244,
+                                // minHeight: 240maxHeight: 520,
 
-                              currentTab: currentTab,
-                              onTabSelected: (selectedIndex) {
-                                context
-                                    .read<BottleDetailsBloc>()
-                                    .add(SwitchTabEvent(selectedIndex));
-                              },
-                            ),
-                          )
-                        )
-                        ,
-
-                    SliverPadding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      sliver:
-                        SliverToBoxAdapter(
-                          child: Builder(
-                            builder: (context) {
-                              switch (state.activeTab) {
-                                case 0:
-                                  return TabDetailsWidget(item: widget.item,);
-                                case 1:
-                                  return TabTastingNotesWidget(item: widget.item, scrollController: _scrollController,);
-                                case 2:
-                                  return TabHistoryWidget();
-                                default:
-                                  return Container();
-                              }
-                            },
-                          ),
-                        )),
+                                currentTab: currentTab,
+                                onTabSelected: (selectedIndex) {
+                                  context
+                                      .read<BottleDetailsBloc>()
+                                      .add(SwitchTabEvent(selectedIndex));
+                                },
+                              ),
+                            )),
+                        SliverPadding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            sliver: SliverToBoxAdapter(
+                              child: Builder(
+                                builder: (context) {
+                                  switch (state.activeTab) {
+                                    case 0:
+                                      return TabDetailsWidget(
+                                        item: widget.item,
+                                      );
+                                    case 1:
+                                      return TabTastingNotesWidget(
+                                        item: widget.item,
+                                        scrollController: _scrollController,
+                                      );
+                                    case 2:
+                                      return TabHistoryWidget(
+                                        item: widget.item,
+                                      );
+                                    default:
+                                      return Container();
+                                  }
+                                },
+                              ),
+                            )),
+                        const SliverPadding(
+                          padding: EdgeInsets.only(bottom: 80.0),
+                        ),
                       ],
                     ),
                   ),
                 ],
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 24.0),
+                  child: IntrinsicWidth(
+                    child: CustomYellowButton(
+                      icon: Icons.add,
+                      text: "Add to my collection",
+                      onPressed: () {
+                        debugPrint("Button pressed!");
+                      },
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
@@ -175,6 +189,3 @@ class _BottleDetailsContentState extends State<_BottleDetailsContent> {
     );
   }
 }
-
-
-

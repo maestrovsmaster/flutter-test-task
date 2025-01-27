@@ -11,9 +11,12 @@ import 'data/datasource/mock_item_generator.dart';
 import 'presentation/bloc/auth/auth_block.dart';
 import 'presentation/bloc/auth/auth_event.dart';
 import 'presentation/bloc/observer/block_observer.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting('en_US', null);
+
   await Hive.initFlutter();
   Hive.registerAdapter(ItemModelAdapter());
   await di.init();

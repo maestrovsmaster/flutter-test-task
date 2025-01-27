@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:pixelfield_flutter_task/data/datasource/mock_collection_datasource.dart';
 import 'package:pixelfield_flutter_task/data/models/item_model.dart';
 
@@ -13,7 +14,7 @@ class CollectionRepositoryImpl implements CollectionRepository {
 
   @override
   Future<List<ItemModel>> getItems({required int page, required int limit}) {
-    print("'ONLINE REQUEST' CollectionRepository getItems ");
+    debugPrint("'ONLINE REQUEST' CollectionRepository getItems ");
     return dataSource.fetchItems(page: page, limit: limit);
   }
 }

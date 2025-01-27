@@ -16,11 +16,15 @@ class HistoryEvent extends HiveObject {
   @HiveField(3)
   final List<String>? attachments;
 
+  @HiveField(4)
+  final DateTime? dateTime;
+
   HistoryEvent({
     this.label,
     this.title,
     this.description,
     this.attachments,
+    this.dateTime,
   });
 
   factory HistoryEvent.fromJson(Map<String, dynamic> json) {
@@ -31,6 +35,9 @@ class HistoryEvent extends HiveObject {
       attachments: (json['attachments'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
+      dateTime: json['dateTime'] != null
+          ? DateTime.parse(json['dateTime'])
+          : null, //Parse the dateTime string to a DateTime object in ISO 8601
     );
   }
 
@@ -40,6 +47,7 @@ class HistoryEvent extends HiveObject {
       'title': title,
       'description': description,
       'attachments': attachments,
+      'dateTime': dateTime?.toIso8601String(),
     };
   }
 }

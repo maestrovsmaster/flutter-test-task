@@ -36,7 +36,7 @@ class MainScreen extends StatelessWidget {
                           NotificationsWidget(
                             hasNotifications: state.notificationCount > 0,
                             onClick: () {
-                              print('Bell icon clicked!');
+                              debugPrint('Bell icon clicked!');
                               // TODO: Implement notification functionality
                             },
                           )

@@ -26,8 +26,6 @@ class CollectionScreen extends StatelessWidget {
             } else if (state is CollectionLoaded) {
               final items = state.items;
 
-              print("state.hasReachedMax = ${state.hasReachedMax}");
-
               final itemRatio = calculateChildAspectRatio(context);
               return NotificationListener<ScrollNotification>(
                 onNotification: (ScrollNotification scrollInfo) {
@@ -65,7 +63,7 @@ class CollectionScreen extends StatelessWidget {
                 ),
               );
             } else if (state is CollectionError) {
-              print("error ${state.errorMessage}");
+              debugPrint("error ${state.errorMessage}");
               return ErrorWithRefreshWidget(
                 errorMessage: state.errorMessage,
                 onRefresh: () {

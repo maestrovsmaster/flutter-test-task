@@ -79,6 +79,7 @@ flutter:
     - assets/images/ic_down.svg
     - assets/images/img_bottle_background.png
     - assets/images/img_genuine.png
+    - assets/images/ic_clip.svg
 
     - assets/i18n/
   # The following line ensures that the Material Icons font is

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
 import 'package:pixelfield_flutter_task/data/models/item_model.dart';
 
@@ -15,7 +16,7 @@ class LocalCollectionRepository {
   List<ItemModel> getItems({required int page, required int limit}) {
     final jsonList = cacheBox.get('all_items', defaultValue: []);
 
-    print("'OFFLINE CACHE' LocalCollectionRepository getItems ");
+    debugPrint("'OFFLINE CACHE' LocalCollectionRepository getItems ");
 
     final allItems = (jsonList as List)
         .map((json) => ItemModel.fromJson(Map<String, dynamic>.from(json as Map)))

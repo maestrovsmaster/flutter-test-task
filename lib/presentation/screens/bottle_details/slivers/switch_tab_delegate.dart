@@ -35,7 +35,7 @@ class SwitchTabDelegate extends SliverPersistentHeaderDelegate {
     final title = item.name;
     final vineAge = item.year != null
         ? translate('year_old',
-            args: {'age': calculateWineAge(item.year!).toString()})
+            args: {'age': calculateItemAge(item.year!).toString()})
         : "";
     final batchNumber = item.batchNumber != null ? "#${item.batchNumber}" : "";
 
