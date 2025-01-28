@@ -21,13 +21,14 @@ class HistoryEventAdapter extends TypeAdapter<HistoryEvent> {
       title: fields[1] as String?,
       description: fields[2] as String?,
       attachments: (fields[3] as List?)?.cast<String>(),
+      dateTime: fields[4] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, HistoryEvent obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.label)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class HistoryEventAdapter extends TypeAdapter<HistoryEvent> {
       ..writeByte(2)
       ..write(obj.description)
       ..writeByte(3)
-      ..write(obj.attachments);
+      ..write(obj.attachments)
+      ..writeByte(4)
+      ..write(obj.dateTime);
   }
 
   @override

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pixelfield_flutter_task/core/di/di_container.dart';
-import 'package:pixelfield_flutter_task/presentation/bloc/collection/collection_block.dart';
-import 'package:pixelfield_flutter_task/presentation/bloc/collection/collection_event.dart';
-import 'package:pixelfield_flutter_task/presentation/bloc/collection/collection_state.dart';
+import 'package:pixelfield_flutter_task/presentation/bloc/collections_list/collection_block.dart';
+import 'package:pixelfield_flutter_task/presentation/bloc/collections_list/collection_event.dart';
+import 'package:pixelfield_flutter_task/presentation/bloc/collections_list/collection_state.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/collection_item.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/error_with_refresh_widget.dart';
 
-class CollectionScreen extends StatelessWidget {
-  const CollectionScreen({super.key});
+class CollectionsListScreen extends StatelessWidget {
+  const CollectionsListScreen({super.key});
 
   static const itemCardSizeRatio = 1.86;
   static const crossAxisSpacing = 8.0;
@@ -60,7 +60,7 @@ class CollectionScreen extends StatelessWidget {
                       }
                     }
                     return CollectionItem(item: items[index], onTap: (item) {
-                      context.push('/details', extra: item);
+                      context.push('/details', extra: item.id);
                     });
                   },
                 ),

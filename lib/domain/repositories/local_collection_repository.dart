@@ -4,8 +4,9 @@ import 'package:pixelfield_flutter_task/data/models/item_model.dart';
 
 class LocalCollectionRepository {
   final Box<List<dynamic>> cacheBox;
+  final Box<ItemModel> itemBox;
 
-  LocalCollectionRepository({required this.cacheBox});
+  LocalCollectionRepository({required this.cacheBox, required this.itemBox});
 
   Future<void> saveAllItems(List<ItemModel> items) async {
     final jsonList = items.map((item) => item.toJson()).toList();
@@ -36,6 +37,17 @@ class LocalCollectionRepository {
     return allItems.sublist(startIndex, safeEndIndex);
   }
 
+  ItemModel? getItemFromCache(String itemId) {
+    return itemBox.get(itemId);
+  }
+
+  Future<void> saveItemToCache(String itemId, ItemModel item) async {
+    try {
+      await itemBox.put(itemId, item);
+    }catch(e){
+      debugPrint("Error saving item to cache: $e");
+    }
+  }
 
 
   bool hasCachedItems() {

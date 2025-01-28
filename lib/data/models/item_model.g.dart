@@ -39,13 +39,14 @@ class ItemModelAdapter extends TypeAdapter<ItemModel> {
       officialNotes: fields[19] as TastingNotes?,
       userNotes: fields[20] as TastingNotes?,
       history: (fields[21] as List?)?.cast<HistoryEvent>(),
+      isDetailed: fields[22] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, ItemModel obj) {
     writer
-      ..writeByte(22)
+      ..writeByte(23)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -89,7 +90,9 @@ class ItemModelAdapter extends TypeAdapter<ItemModel> {
       ..writeByte(20)
       ..write(obj.userNotes)
       ..writeByte(21)
-      ..write(obj.history);
+      ..write(obj.history)
+      ..writeByte(22)
+      ..write(obj.isDetailed);
   }
 
   @override

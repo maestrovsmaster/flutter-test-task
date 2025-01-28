@@ -5,9 +5,9 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:pixelfield_flutter_task/core/theme/app_theme.dart';
 import 'package:pixelfield_flutter_task/data/models/item_model.dart';
-import 'package:pixelfield_flutter_task/presentation/screens/main_screen/main_screen.dart';
+import 'package:pixelfield_flutter_task/data/models/tasting_notes.dart';
 import 'core/di/di_container.dart' as di;
-import 'data/datasource/mock_item_generator.dart';
+import 'data/models/history_event.dart';
 import 'presentation/bloc/auth/auth_block.dart';
 import 'presentation/bloc/auth/auth_event.dart';
 import 'presentation/bloc/observer/block_observer.dart';
@@ -21,6 +21,8 @@ Future<void> main() async {
 
   await Hive.initFlutter();
   Hive.registerAdapter(ItemModelAdapter());
+  Hive.registerAdapter(TastingNotesAdapter());
+  Hive.registerAdapter(HistoryEventAdapter());
   await di.init();
 
 
@@ -52,30 +54,11 @@ class MyApp extends StatelessWidget {
         title: 'Pixelfield Flutter Task',
         theme: AppTheme.theme,
         debugShowCheckedModeBanner: false,
-        routerConfig: AppRouter().router, // Використовуємо GoRouter
+        routerConfig: AppRouter().router,
       ),
     );
 
-   // final itemModel = generateMockItem(
-    //    'id_0', 'Springbank', 1992);
 
-    /*return MaterialApp(
-      title: 'Pixelfield Flutter Task',
-      theme: AppTheme.theme,
-      debugShowCheckedModeBanner: false,
-      home: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => di.sl<AuthBloc>()..add(CheckAuthStatusEvent()),
-          ),
-
-        ],
-
-        child:  const MainScreen(),
-
-       // child: BottleDetailsScreen(item: itemModel)
-      ),
-    );*/
   }
 }
 

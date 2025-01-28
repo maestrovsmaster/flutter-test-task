@@ -7,8 +7,10 @@ import 'package:pixelfield_flutter_task/domain/repositories/collection_repositor
 import 'package:pixelfield_flutter_task/domain/repositories/local_collection_repository.dart';
 import 'package:pixelfield_flutter_task/domain/repositories/sign_in_repository.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/auth/auth_block.dart';
-import 'package:pixelfield_flutter_task/presentation/bloc/collection/collection_block.dart';
-import 'package:pixelfield_flutter_task/presentation/bloc/collection/collection_event.dart';
+import 'package:pixelfield_flutter_task/presentation/bloc/bottle_details/bottle_details_block.dart';
+import 'package:pixelfield_flutter_task/presentation/bloc/bottle_details/bottle_details_state.dart';
+import 'package:pixelfield_flutter_task/presentation/bloc/collections_list/collection_block.dart';
+import 'package:pixelfield_flutter_task/presentation/bloc/collections_list/collection_event.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/sign_in/sign_in_block.dart';
 
 final sl = GetIt.instance;
@@ -27,14 +29,15 @@ Future<void> init() async {
 
   final cacheBox = await Hive.openBox<List<dynamic>>('collection_cache');
   sl.registerLazySingleton<Box<List<dynamic>>>(() => cacheBox);
-  sl.registerLazySingleton(() => LocalCollectionRepository(cacheBox: cacheBox));
+
+  sl.registerLazySingleton(() => LocalCollectionRepository(cacheBox: cacheBox, itemBox: itemBox));
   sl.registerLazySingleton<CollectionRepository>(
           () => CollectionRepositoryImpl(dataSource: sl()));
 
   // Register Connectivity
   sl.registerLazySingleton(() => Connectivity());
 
-  //Collection block
+  //Collection list block
   sl.registerFactory(() {
     final bloc = CollectionBloc(
       repository: sl(),
@@ -42,6 +45,16 @@ Future<void> init() async {
       connectivity: sl(),
     );
     bloc.add(FetchItemsEvent());
+    return bloc;
+  });
+
+  //Details block
+  sl.registerFactory(() {
+    final bloc = BottleDetailsBloc(
+      repository: sl(),
+      localRepository: sl(),
+      connectivity: sl(),
+    );
     return bloc;
   });
 

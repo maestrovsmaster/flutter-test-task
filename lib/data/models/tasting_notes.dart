@@ -2,6 +2,8 @@ import 'package:hive_flutter/adapters.dart';
 
 part 'tasting_notes.g.dart';
 
+//Command for generating Hive models: flutter pub run build_runner build
+
 @HiveType(typeId: 3)
 class TastingNotes extends HiveObject {
   @HiveField(0)
@@ -35,4 +37,17 @@ class TastingNotes extends HiveObject {
       'finish': finish,
     };
   }
+
+  TastingNotes copyWith({
+    String? nose,
+    String? palate,
+    String? finish,
+  }) {
+    return TastingNotes(
+      nose: nose ?? this.nose,
+      palate: palate ?? this.palate,
+      finish: finish ?? this.finish,
+    );
+  }
+
 }
