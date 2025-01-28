@@ -9,7 +9,7 @@ import 'package:pixelfield_flutter_task/presentation/screens/my_collection/colle
 import 'package:pixelfield_flutter_task/presentation/screens/placeholder_screen/placeholder_screen.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/notifications_widget.dart';
 
-import '../placeholder_screen/main_screen_bottom_navigation.dart';
+import 'main_screen_bottom_navigation.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});

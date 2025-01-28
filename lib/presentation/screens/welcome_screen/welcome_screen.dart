@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pixelfield_flutter_task/core/theme/app_colors.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/custom_yellow_icon_button.dart';
 
@@ -108,7 +109,7 @@ class WelcomeScreenState extends State<WelcomeScreen>
                               ),
                               TextButton(
                                 onPressed: () {
-                                  // Navigate to Sign In screen
+                                  context.go('/signIn');
                                 },
                                 child:  Text(
                                   translate('sign_in_first'),

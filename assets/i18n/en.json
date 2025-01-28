@@ -5,6 +5,17 @@
   "have_account": "Have an account?",
   "sign_in_first": "Sign in first",
 
+  "email": "Email",
+  "password": "Password",
+  "sign_in": "Sign in",
+  "login_successful": "Login successful!",
+  "error_occurred": "An error occurred. Please try again.",
+  "invalid_email_or_password": "Invalid email or password.",
+
+  "continue": "Continue",
+  "cant_sign_in": "Can’t sign in?",
+  "recover_password": "Recover password",
+
   "error_no_connection": "No internet connection",
   "button_refresh": "Refresh",
   "tab_scan": "Scan",
