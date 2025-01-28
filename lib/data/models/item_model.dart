@@ -126,14 +126,14 @@ class ItemModel extends HiveObject {
       finish: json['finish'],
       videoUrl: json['videoUrl'],
       officialNotes: json['officialNotes'] != null
-          ? TastingNotes.fromJson(json['officialNotes'])
+          ? TastingNotes.fromJson(Map<String, dynamic>.from(json['officialNotes']))
           : null,
       userNotes: json['userNotes'] != null
-          ? TastingNotes.fromJson(json['userNotes'])
+          ? TastingNotes.fromJson(Map<String, dynamic>.from(json['userNotes']))
           : null,
       history: json['history'] != null
           ? (json['history'] as List<dynamic>?)
-              ?.map((e) => HistoryEvent.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => HistoryEvent.fromJson(Map<String, dynamic>.from(e)))
               .toList()
           : null,
     );
