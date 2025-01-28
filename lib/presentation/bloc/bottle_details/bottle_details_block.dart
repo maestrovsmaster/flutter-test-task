@@ -5,7 +5,7 @@ import 'bottle_details_state.dart';
 
 class BottleDetailsBloc extends Bloc<BottleDetailsEvent, BottleDetailsState> {
 
-  BottleDetailsBloc() : super(BottleDetailsState(activeTab: 2)) {
+  BottleDetailsBloc() : super(BottleDetailsState(activeTab: 0)) {
     on<SwitchTabEvent>((event, emit) {
       emit(state.copyWith(activeTab: event.tabIndex));
     });

@@ -13,6 +13,11 @@ class AppTheme {
         primary: AppColors.background,
         secondary: AppColors.accentColor,
       ),
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: AppColors.accentColor,
+        selectionColor: AppColors.accentColor.withValues(alpha: 0.1),
+        selectionHandleColor: AppColors.accentColor,
+      ),
       cardColor: AppColors.cardBackground,
       cardTheme: const CardTheme(
         color: AppColors.cardBackground,

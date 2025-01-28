@@ -5,9 +5,11 @@ import 'package:pixelfield_flutter_task/data/datasource/mock_collection_datasour
 import 'package:pixelfield_flutter_task/data/models/item_model.dart';
 import 'package:pixelfield_flutter_task/domain/repositories/collection_repository.dart';
 import 'package:pixelfield_flutter_task/domain/repositories/local_collection_repository.dart';
+import 'package:pixelfield_flutter_task/domain/repositories/sign_in_repository.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/auth/auth_block.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/collection/collection_block.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/collection/collection_event.dart';
+import 'package:pixelfield_flutter_task/presentation/bloc/sign_in/sign_in_block.dart';
 
 final sl = GetIt.instance;
 
@@ -18,11 +20,10 @@ Future<void> init() async {
 
   sl.registerLazySingleton(() => AuthBloc());
 
-
+  sl.registerLazySingleton(() => SignInRepository());
+  sl.registerFactory(() => SignInBloc(repository: sl<SignInRepository>()));
 
   sl.registerLazySingleton<CollectionDataSource>(() => MockCollectionDataSource());
-
-
 
   final cacheBox = await Hive.openBox<List<dynamic>>('collection_cache');
   sl.registerLazySingleton<Box<List<dynamic>>>(() => cacheBox);

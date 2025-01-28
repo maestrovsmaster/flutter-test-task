@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pixelfield_flutter_task/core/theme/app_colors.dart';
 import 'package:pixelfield_flutter_task/data/models/item_model.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/bottle_details/bottle_details_block.dart';
@@ -9,7 +10,8 @@ import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/sliv
 import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/slivers/popup_menu_delegate.dart';
 import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/slivers/switch_tab_delegate.dart';
 import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/tabs/details/tab_details.widget.dart';
-import 'package:pixelfield_flutter_task/presentation/widgets/custom_yellow_button.dart';
+import 'package:pixelfield_flutter_task/presentation/widgets/close_icon_widget.dart';
+import 'package:pixelfield_flutter_task/presentation/widgets/custom_yellow_icon_button.dart';
 
 import 'tabs/history/tab_history_widget.dart';
 import 'tabs/tasting_notes/tab_tasting_notes_widget.dart';
@@ -81,32 +83,43 @@ class _BottleDetailsContentState extends State<_BottleDetailsContent> {
                 children: [
                   PreferredSize(
                     preferredSize: const Size.fromHeight(72),
-                    child: AppBar(
+                    child: Padding(padding: const EdgeInsets.only(left: 16, right: 16), child:
+
+                    AppBar(
                       backgroundColor: Colors.transparent,
-                      title: const Text(
+                      automaticallyImplyLeading: false,
+                      title:  Text(
                         'Genesis Collection',
-                        style: TextStyle(color: Colors.white),
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: AppColors.primaryText,
+                        ),
                       ),
                       actions: [
-                        IconButton(
-                          icon: const Icon(Icons.close, color: Colors.white),
-                          onPressed: () => Navigator.pop(context),
-                        )
+                        CloseIconWidget(
+                          size: 40.0,
+                          iconSize: 24.0,
+                          onClose: () {
+                            context.pop();
+                          },
+                        ),
                       ],
                     ),
-                  ),
+                  )),
                   Expanded(
                     child: CustomScrollView(
                       controller: _scrollController,
                       slivers: [
-                        SliverPersistentHeader(
-                          pinned: true,
-                          delegate: PopupMenuDelegate(
-                            currentHeight: 40,
-                            minHeight: 0,
-                            maxHeight: 40,
-                          ),
-                        ),
+                        SliverPadding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            sliver: SliverPersistentHeader(
+                              pinned: true,
+                              delegate: PopupMenuDelegate(
+                                currentHeight: 40,
+                                minHeight: 0,
+                                maxHeight: 40,
+                              ),
+                            )),
                         SliverPersistentHeader(
                           pinned: true,
                           delegate: BottleImageDelegate(
@@ -172,7 +185,7 @@ class _BottleDetailsContentState extends State<_BottleDetailsContent> {
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 24.0),
                   child: IntrinsicWidth(
-                    child: CustomYellowButton(
+                    child: CustomYellowIconButton(
                       icon: Icons.add,
                       text: "Add to my collection",
                       onPressed: () {

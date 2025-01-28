@@ -12,7 +12,7 @@ class MockCollectionDataSource implements CollectionDataSource {
   Future<List<ItemModel>> fetchItems(
       {required int page, required int limit}) async {
     await Future.delayed(
-        const Duration(milliseconds: 400)); //Mock server response time
+        const Duration(milliseconds: 300)); //Mock server response time
 
     const totalItems = maxMockItems;
     final startIndex = (page - 1) * limit;

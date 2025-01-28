@@ -1,4 +1,22 @@
 {
+
+  "welcome_title": "Vítejte!",
+  "welcome_subtitle": "Text text text",
+  "scan_bottle": "Naskenujte láhev",
+  "have_account": "Máte účet?",
+  "sign_in_first": "Přihlaste se nejprve",
+
+  "email": "E-mail",
+  "password": "Heslo",
+  "sign_in": "Přihlásit se",
+  "login_successful": "Přihlášení bylo úspěšné!",
+  "error_occurred": "Došlo k chybě. Zkuste to prosím znovu.",
+  "invalid_email_or_password": "Neplatný e-mail nebo heslo.",
+
+  "continue": "Pokračovat",
+  "cant_sign_in": "Nemůžete se přihlásit?",
+  "recover_password": "Obnovit heslo",
+
   "error_no_connection": "Žádné připojení k internetu",
   "button_refresh": "Obnovit",
   "tab_scan": "Skenovat",
