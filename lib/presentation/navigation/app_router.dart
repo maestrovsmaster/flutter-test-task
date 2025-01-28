@@ -10,7 +10,7 @@ import 'custom_transitions.dart';
 
 class AppRouter {
   final GoRouter _router = GoRouter(
-    initialLocation: '/welcome',
+    initialLocation: '/main',
     routes: [
       GoRoute(
         path: '/welcome',

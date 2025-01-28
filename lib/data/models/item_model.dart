@@ -142,7 +142,7 @@ class ItemModel extends HiveObject {
               ?.map((e) => HistoryEvent.fromJson(Map<String, dynamic>.from(e)))
               .toList()
           : null,
-      isDetailed: json['isDetailed'],
+      isDetailed: json['isDetailed'] ?? false,
     );
   }
 

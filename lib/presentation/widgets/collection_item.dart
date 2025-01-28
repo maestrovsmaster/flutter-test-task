@@ -15,7 +15,8 @@ class CollectionItem extends StatelessWidget {
 
     final year = item.year != null ? "${item.year}" : "";
     final batch = item.batchNumber != null ? "${item.batchNumber}" : "";
-    final title = "${item.name}\n$year #$batch";
+    final title = "${item.name}\n$year";
+    final titleBatch = "#$batch";
     final subtitle = "(${item.count} / ${item.total})";
 
     return InkWell(
@@ -45,6 +46,14 @@ class CollectionItem extends StatelessWidget {
               title,
               style: Theme.of(context).textTheme.titleLarge,
               textAlign: TextAlign.start,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+            Text(
+              titleBatch,
+              style: Theme.of(context).textTheme.titleLarge,
+              textAlign: TextAlign.start,
+              maxLines: 1,
             ),
             const SizedBox(height: 4),
 

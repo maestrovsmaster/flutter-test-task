@@ -23,7 +23,9 @@ Future<void> main() async {
   Hive.registerAdapter(ItemModelAdapter());
   Hive.registerAdapter(TastingNotesAdapter());
   Hive.registerAdapter(HistoryEventAdapter());
-  await di.init();
+
+ //Use 'generator' or 'assets' for choosing mock data source
+  await di.init(mockType: 'generator');
 
 
   WidgetsFlutterBinding.ensureInitialized();

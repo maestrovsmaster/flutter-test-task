@@ -7,13 +7,13 @@ part 'tasting_notes.g.dart';
 @HiveType(typeId: 3)
 class TastingNotes extends HiveObject {
   @HiveField(0)
-  final String nose;
+  final String? nose;
 
   @HiveField(1)
-  final String palate;
+  final String? palate;
 
   @HiveField(2)
-  final String finish;
+  final String? finish;
 
 
   TastingNotes({
@@ -24,9 +24,9 @@ class TastingNotes extends HiveObject {
 
   factory TastingNotes.fromJson(Map<String, dynamic> json) {
     return TastingNotes(
-      nose: json['nose'] ?? '',
-      palate: json['palate'] ?? '',
-      finish: json['finish'] ?? '',
+      nose: json['nose'],
+      palate: json['palate'],
+      finish: json['finish'],
     );
   }
 

@@ -10,7 +10,6 @@ typedef TabSelectedCallback = void Function(int selectedIndex);
 class SwitchTabDelegate extends SliverPersistentHeaderDelegate {
   final ItemModel item;
 
-
   final double height = 200;
 
   final int currentTab;
@@ -57,13 +56,13 @@ class SwitchTabDelegate extends SliverPersistentHeaderDelegate {
               const SizedBox(
                 height: 8,
               ),
-
-              HighlightedTextWidget(
-                text1: "$title ",
-                textYellow: vineAge,
-                text2: batchNumber,
+              FittedBox(
+                child: HighlightedTextWidget(
+                  text1: "$title ",
+                  textYellow: vineAge,
+                  text2: batchNumber,
+                ),
               ),
-
               const SizedBox(height: 24),
               Container(
                   decoration: BoxDecoration(

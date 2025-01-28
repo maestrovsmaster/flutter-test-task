@@ -19,6 +19,13 @@ class BottleDetailsBloc extends Bloc<BottleDetailsEvent, BottleDetailsState> {
       required this.localRepository,
       required this.connectivity})
       : super(BottleDetailsInitial()) {
+
+    on<SwitchTabEvent>((event, emit) {
+      if(state is BottleDetailsLoaded) {
+        emit((state as BottleDetailsLoaded).copyWith(activeTab: event.tabIndex));
+      }
+    });
+
     on<FetchBottleDetailsEvent>((event, emit) async {
       emit(BottleDetailsLoading());
       try {
@@ -28,7 +35,6 @@ class BottleDetailsBloc extends Bloc<BottleDetailsEvent, BottleDetailsState> {
 
         if (!hasConnection) {
           debugPrint("Offline");
-          debugPrint("Offline $cachedItem   *** cachedItem.isDetailed = ${cachedItem?.isDetailed}");
           if (cachedItem != null && cachedItem.isDetailed) {
             emit(BottleDetailsLoaded(item: cachedItem));
             return;

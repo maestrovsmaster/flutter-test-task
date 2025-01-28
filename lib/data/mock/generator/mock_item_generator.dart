@@ -63,7 +63,7 @@ ItemModel generateMockItem(String id, String name, int year) {
           "https://example.com/attachment3.jpg",
           "https://example.com/attachment4.jpg"
         ],
-        dateTime: DateTime(2015, 8, 21), // Дата повернення бочок
+        dateTime: DateTime(2015, 8, 21),
       ),
       HistoryEvent(
         label: "Event 4",
@@ -75,7 +75,7 @@ ItemModel generateMockItem(String id, String name, int year) {
           "https://example.com/auction1.jpg",
           "https://example.com/auction2.jpg"
         ],
-        dateTime: DateTime(2024, 6, 15), // Дата аукціону
+        dateTime: DateTime(2024, 6, 15),
       ),
     ],
   );
