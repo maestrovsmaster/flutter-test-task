@@ -9,7 +9,8 @@ import 'package:pixelfield_flutter_task/presentation/bloc/bottle_details/bottle_
 import 'package:pixelfield_flutter_task/presentation/bloc/bottle_details/bottle_details_state.dart';
 import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/slivers/bottle_image_delegate.dart';
 import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/slivers/popup_menu_delegate.dart';
-import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/slivers/switch_tab_delegate.dart';
+import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/slivers/item_title_delegate.dart';
+import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/slivers/tab_bar_persistent_header.dart';
 import 'package:pixelfield_flutter_task/presentation/screens/bottle_details/tabs/details/tab_details.widget.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/close_icon_widget.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/custom_yellow_icon_button.dart';
@@ -19,7 +20,6 @@ import 'tabs/history/tab_history_widget.dart';
 import 'tabs/tasting_notes/tab_tasting_notes_widget.dart';
 
 class BottleDetailsScreen extends StatelessWidget {
-  // final ItemModel item;
   final String itemId;
 
   const BottleDetailsScreen({super.key, required this.itemId});
@@ -34,7 +34,6 @@ class BottleDetailsScreen extends StatelessWidget {
 }
 
 class _BottleDetailsContent extends StatefulWidget {
-  // final ItemModel item;
   final String itemId;
 
   const _BottleDetailsContent({required this.itemId});
@@ -43,20 +42,24 @@ class _BottleDetailsContent extends StatefulWidget {
   State<_BottleDetailsContent> createState() => _BottleDetailsContentState();
 }
 
-class _BottleDetailsContentState extends State<_BottleDetailsContent> {
+class _BottleDetailsContentState extends State<_BottleDetailsContent>
+    with SingleTickerProviderStateMixin {
   late final ScrollController _scrollController;
+  late final TabController _tabController;
 
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
     _scrollController.addListener(_onScroll);
+    _tabController = TabController(length: 3, vsync: this);
   }
 
   @override
   void dispose() {
     _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
+
     super.dispose();
   }
 
@@ -96,8 +99,6 @@ class _BottleDetailsContentState extends State<_BottleDetailsContent> {
             },
           );
         } else if (state is BottleDetailsLoaded) {
-          int currentTab = 0;
-          currentTab = state.activeTab;
 
           ItemModel item = state.item;
 
@@ -168,18 +169,22 @@ class _BottleDetailsContentState extends State<_BottleDetailsContent> {
                                   const EdgeInsets.symmetric(horizontal: 16.0),
                               sliver: SliverPersistentHeader(
                                 pinned: true,
-                                delegate: SwitchTabDelegate(
+                                delegate: ItemTitleDelegate(
                                   item: item,
-                                  // currentHeight: 244,
-                                  // minHeight: 240maxHeight: 520,
-
-                                  currentTab: currentTab,
-                                  onTabSelected: (selectedIndex) {
-                                    context
-                                        .read<BottleDetailsBloc>()
-                                        .add(SwitchTabEvent(selectedIndex));
-                                  },
                                 ),
+                              )),
+                          SliverPadding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              sliver: SliverPersistentHeader(
+                                pinned: true,
+                                delegate: TabBarPersistentHeaderDelegate(
+                                    tabController: _tabController,
+                                    onTabSelected: (index) {
+                                      context
+                                          .read<BottleDetailsBloc>()
+                                          .add(SwitchTabEvent(index));
+                                    }),
                               )),
                           SliverPadding(
                               padding:
@@ -187,23 +192,36 @@ class _BottleDetailsContentState extends State<_BottleDetailsContent> {
                               sliver: SliverToBoxAdapter(
                                 child: Builder(
                                   builder: (context) {
+                                    final StatelessWidget childWidget;
                                     switch (state.activeTab) {
                                       case 0:
-                                        return TabDetailsWidget(
+                                        childWidget = TabDetailsWidget(
                                           item: item,
                                         );
                                       case 1:
-                                        return TabTastingNotesWidget(
+                                        childWidget = TabTastingNotesWidget(
                                           item: item,
                                           scrollController: _scrollController,
                                         );
                                       case 2:
-                                        return TabHistoryWidget(
+                                        childWidget = TabHistoryWidget(
                                           item: item,
                                         );
                                       default:
                                         return Container();
                                     }
+
+                                    return AnimatedSwitcher(
+                                      duration: const Duration(milliseconds: 90),
+                                      transitionBuilder: (Widget child,
+                                          Animation<double> animation) {
+                                        return FadeTransition(
+                                          opacity: animation,
+                                          child: child,
+                                        );
+                                      },
+                                      child: childWidget,
+                                    );
                                   },
                                 ),
                               )),
@@ -234,7 +252,7 @@ class _BottleDetailsContentState extends State<_BottleDetailsContent> {
             ),
           );
         } else {
-          return Placeholder();
+          return const Placeholder();
         }
       },
     );

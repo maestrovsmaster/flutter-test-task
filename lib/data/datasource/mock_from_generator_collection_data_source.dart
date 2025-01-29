@@ -27,7 +27,7 @@ class MockFromGeneratorCollectionDataSource implements CollectionDataSource {
           (index) {
         final itemIndex = startIndex + index;
         return generateMockItem(
-            'id_$itemIndex', 'Whiskey  Bottle 1  Bottle 2', 1994); //Springbank
+            'id_$itemIndex', 'Springbank', 1994);
       },
     );
   }
@@ -35,6 +35,6 @@ class MockFromGeneratorCollectionDataSource implements CollectionDataSource {
   @override
   Future<ItemModel?> fetchItemDetails(String itemId) async{
     return generateMockItem(
-        itemId, 'Whiskey  Bottle 1  Bottle 2', 1994);
+        itemId, 'Springbank', 1994);
   }
 }

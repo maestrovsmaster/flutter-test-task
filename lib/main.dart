@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
@@ -24,9 +23,8 @@ Future<void> main() async {
   Hive.registerAdapter(TastingNotesAdapter());
   Hive.registerAdapter(HistoryEventAdapter());
 
- //Use 'generator' or 'assets' for choosing mock data source
-  await di.init(mockType: 'generator');
-
+  //Use 'generator' or 'assets' for choosing mock data source
+  await di.init(mockType: 'assets');
 
   WidgetsFlutterBinding.ensureInitialized();
   var delegate = await LocalizationDelegate.create(
@@ -37,7 +35,7 @@ Future<void> main() async {
   Bloc.observer = BottleDetailsBlocObserver();
   runApp(
     LocalizedApp(delegate, const MyApp()),
-       );
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -45,7 +43,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -59,8 +56,5 @@ class MyApp extends StatelessWidget {
         routerConfig: AppRouter().router,
       ),
     );
-
-
   }
 }
-

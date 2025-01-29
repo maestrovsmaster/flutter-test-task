@@ -38,6 +38,13 @@ ItemModel generateMockItem(String id, String name, int year) {
     ),
     history: [
       HistoryEvent(
+        label: "Event 0",
+        title: "Bottled",
+        description: "The whisky was bottled in December 2022.",
+        attachments: ["https://example.com/attachment1.jpg"],
+        dateTime: DateTime(2000, 10, 12),
+      ),
+      HistoryEvent(
         label: "Event 1",
         title: "Bottled",
         description: "The whisky was bottled in December 2022.",

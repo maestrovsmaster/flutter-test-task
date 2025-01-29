@@ -10,7 +10,7 @@ import 'custom_transitions.dart';
 
 class AppRouter {
   final GoRouter _router = GoRouter(
-    initialLocation: '/main',
+    initialLocation: '/welcome',
     routes: [
       GoRoute(
         path: '/welcome',
@@ -38,7 +38,7 @@ class AppRouter {
       GoRoute(
         path: '/details',
         pageBuilder: (context, state) {
-          final itemId = state.extra as String;// ItemModel;
+          final itemId = state.extra as String;
           return CustomTransitionPage(
             child: BottleDetailsScreen(itemId: itemId),
             transitionsBuilder: slideTransition,
