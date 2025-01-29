@@ -15,7 +15,8 @@ class MainScreenBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return SafeArea(
+        child: SizedBox(
         height: 80,
          child: BottomNavigationBar(
           currentIndex: currentIndex,
@@ -47,7 +48,7 @@ class MainScreenBottomNavigationBar extends StatelessWidget {
               isSelected: currentIndex == 3,
             ),
           ],
-        ));
+        )));
   }
 
   BottomNavigationBarItem _buildNavItem(
