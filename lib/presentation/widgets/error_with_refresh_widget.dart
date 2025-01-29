@@ -38,7 +38,7 @@ class ErrorWithRefreshWidget extends StatelessWidget {
             ElevatedButton.icon(
               onPressed: onRefresh,
               icon: const Icon(Icons.refresh),
-              label:  Text(translate('button_refresh')), //Text('button_refresh'.tr()),
+              label:  Text(translate('button_refresh')),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               ),

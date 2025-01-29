@@ -1,4 +1,9 @@
-abstract class SignInEvent {}
+import 'package:equatable/equatable.dart';
+
+abstract class SignInEvent extends Equatable {
+  @override
+  List<Object?> get props => [];
+}
 
 class FetchLogin extends SignInEvent {
   final String email;
@@ -7,9 +12,16 @@ class FetchLogin extends SignInEvent {
 
   FetchLogin(
       {required this.email, required this.password, required this.rememberMe});
+
+  @override
+  List<Object?> get props => [email, password, rememberMe];
 }
 
-class ToggleRememberMe extends SignInEvent {
+class ToggleRememberMeEvent extends SignInEvent {
   final bool value;
-  ToggleRememberMe({required this.value});
+
+  ToggleRememberMeEvent({required this.value});
+
+  @override
+  List<Object?> get props => [value];
 }

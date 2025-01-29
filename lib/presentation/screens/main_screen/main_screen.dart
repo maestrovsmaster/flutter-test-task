@@ -7,6 +7,7 @@ import 'package:pixelfield_flutter_task/core/theme/app_colors.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/main_screen/main_screen_block.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/main_screen/main_screen_event.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/main_screen/main_screen_state.dart';
+import 'package:pixelfield_flutter_task/presentation/navigation/app_router.dart';
 import 'package:pixelfield_flutter_task/presentation/screens/my_collections_list/collections_list_screen.dart';
 import 'package:pixelfield_flutter_task/presentation/screens/placeholder_screen/placeholder_screen.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/confirm_dialog.dart';
@@ -24,7 +25,7 @@ class MainScreen extends StatelessWidget {
         child: BlocListener<MainScreenBloc, MainScreenState>(
           listener: (context, state) {
             if (state is LogoutSuccess) {
-              context.go('/welcome');
+              context.go(AppRoutes.welcome);
             }
           },
           child: BlocBuilder<MainScreenBloc, MainScreenState>(

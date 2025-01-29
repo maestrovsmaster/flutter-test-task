@@ -10,8 +10,8 @@ import 'package:pixelfield_flutter_task/domain/repositories/local_collection_rep
 import 'package:pixelfield_flutter_task/domain/repositories/sign_in_repository.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/auth/auth_block.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/bottle_details/bottle_details_block.dart';
-import 'package:pixelfield_flutter_task/presentation/bloc/collections_list/collection_block.dart';
-import 'package:pixelfield_flutter_task/presentation/bloc/collections_list/collection_event.dart';
+import 'package:pixelfield_flutter_task/presentation/bloc/collections_list/collections_list_block.dart';
+import 'package:pixelfield_flutter_task/presentation/bloc/collections_list/collections_list_event.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/main_screen/main_screen_block.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/sign_in/sign_in_block.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/welcome/welcome_block.dart';
@@ -38,8 +38,11 @@ Future<void> init({String mockType = 'assets'}) async {
   final cacheBox = await Hive.openBox<List<dynamic>>('collection_cache');
   sl.registerLazySingleton<Box<List<dynamic>>>(() => cacheBox);
 
+  final collectionBox = await Hive.openBox<List<String>>('collection');
+  sl.registerLazySingleton<Box<List<String>>>(() => collectionBox);
+
   sl.registerLazySingleton(
-      () => LocalCollectionRepository(cacheBox: cacheBox, itemBox: itemBox));
+      () => LocalCollectionRepository(cacheBox: cacheBox, itemBox: itemBox, collectionBox: collectionBox));
   sl.registerLazySingleton<CollectionRepository>(
       () => CollectionRepositoryImpl(dataSource: sl()));
 
@@ -48,7 +51,7 @@ Future<void> init({String mockType = 'assets'}) async {
 
   //Collection list block
   sl.registerFactory(() {
-    final bloc = CollectionBloc(
+    final bloc = CollectionsListBloc(
       repository: sl(),
       localRepository: sl(),
       connectivity: sl(),

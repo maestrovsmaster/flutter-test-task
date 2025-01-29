@@ -28,7 +28,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       }
     });
 
-    on<ToggleRememberMe>((event, emit) {
+    on<ToggleRememberMeEvent>((event, emit) {
       rememberMe = event.value;
       emit(RememberMeUpdated(value: event.value));
     });

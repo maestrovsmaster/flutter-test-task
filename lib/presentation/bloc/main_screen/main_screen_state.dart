@@ -1,4 +1,9 @@
-abstract class MainScreenState {}
+import 'package:equatable/equatable.dart';
+
+abstract class MainScreenState extends Equatable {
+  @override
+  List<Object?> get props => [];
+}
 
 class MainScreenInitial extends MainScreenState {
   final int selectedIndex;
@@ -12,6 +17,9 @@ class MainScreenInitial extends MainScreenState {
       notificationCount: notificationCount ?? this.notificationCount,
     );
   }
+
+  @override
+  List<Object?> get props => [selectedIndex, notificationCount];
 }
 
 class MainScreenLoading extends MainScreenState {}

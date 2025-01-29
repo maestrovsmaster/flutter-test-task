@@ -19,10 +19,10 @@ class BottleDetailsBloc extends Bloc<BottleDetailsEvent, BottleDetailsState> {
       required this.localRepository,
       required this.connectivity})
       : super(BottleDetailsInitial()) {
-
     on<SwitchTabEvent>((event, emit) {
-      if(state is BottleDetailsLoaded) {
-        emit((state as BottleDetailsLoaded).copyWith(activeTab: event.tabIndex));
+      if (state is BottleDetailsLoaded) {
+        emit(
+            (state as BottleDetailsLoaded).copyWith(activeTab: event.tabIndex));
       }
     });
 
@@ -33,8 +33,9 @@ class BottleDetailsBloc extends Bloc<BottleDetailsEvent, BottleDetailsState> {
 
         final cachedItem = localRepository.getItemFromCache(event.itemId);
 
+        final isAdded = localRepository.isItemAddedToCollection(event.itemId);
+
         if (!hasConnection) {
-          debugPrint("Offline");
           if (cachedItem != null && cachedItem.isDetailed) {
             emit(BottleDetailsLoaded(item: cachedItem));
             return;
@@ -46,30 +47,36 @@ class BottleDetailsBloc extends Bloc<BottleDetailsEvent, BottleDetailsState> {
           }
         }
 
-        debugPrint("Online");
-
         if (cachedItem != null && cachedItem.isDetailed) {
-          emit(BottleDetailsLoaded(item: cachedItem));
+          emit(BottleDetailsLoaded(item: cachedItem, isAdded: isAdded));
           return;
         }
 
-        debugPrint("Online 2");
-
         final fetchedItem = await repository.fetchItemDetails(event.itemId);
-
-        debugPrint("Online fetchedItem = $fetchedItem");
 
         if (fetchedItem != null) {
           localRepository.saveItemToCache(
               event.itemId, fetchedItem.copyWith(isDetailed: true));
-          debugPrint("Online saved fetchedItem = $fetchedItem");
-          emit(BottleDetailsLoaded(item: fetchedItem));
+
+          emit(BottleDetailsLoaded(item: fetchedItem, isAdded: isAdded));
         } else {
           emit(BottleDetailsError(errorMessage: 'Item not found'));
         }
       } catch (e) {
         emit(BottleDetailsError(errorMessage: e.toString()));
       }
+    });
+    on<AddItemToCollectionEvent>((event, emit) async {
+      localRepository.addItemToCollection(event.itemId);
+      emit((state as BottleDetailsLoaded).copyWith(isAdded: true));
+    });
+    on<RemoveItemFromCollectionEvent>((event, emit) async {
+      localRepository.removeItemFromCollection(event.itemId);
+      emit((state as BottleDetailsLoaded).copyWith(isAdded: false));
+    });
+
+    on<SelectBottleEvent>((event, emit) async {
+      emit((state as BottleDetailsLoaded).copyWith(selectedBottle: event.value));
     });
   }
 }

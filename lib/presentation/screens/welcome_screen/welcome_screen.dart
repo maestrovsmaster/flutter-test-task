@@ -6,6 +6,7 @@ import 'package:pixelfield_flutter_task/core/di/di_container.dart';
 import 'package:pixelfield_flutter_task/core/theme/app_colors.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/welcome/welcome_event.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/welcome/welcome_state.dart';
+import 'package:pixelfield_flutter_task/presentation/navigation/app_router.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/custom_yellow_icon_button.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/welcome_box.dart';
 
@@ -40,7 +41,7 @@ class WelcomeScreenState extends State<WelcomeScreen>
             BlocListener<WelcomeBloc, WelcomeState>(
               listener: (context, state) {
                 if (state is WelcomeAuthenticated) {
-                  context.pushReplacement('/main');
+                  context.pushReplacement(AppRoutes.main);
                 }
               },
               child: BlocBuilder<WelcomeBloc, WelcomeState>(
@@ -76,7 +77,7 @@ class WelcomeScreenState extends State<WelcomeScreen>
                                   text: translate('scan_bottle'),
                                   height: 56,
                                   onPressed: () {
-                                    debugPrint("Button pressed!");
+                                    //TODO
                                   },
                                 ),
                               ),
@@ -92,7 +93,7 @@ class WelcomeScreenState extends State<WelcomeScreen>
                                   ),
                                   TextButton(
                                     onPressed: () {
-                                      context.push('/signIn');
+                                      context.push(AppRoutes.signIn);
                                     },
                                     child: Text(
                                       translate('sign_in_first'),

@@ -54,7 +54,6 @@ class TabBarPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   Tab _buildTab(BuildContext context, String label) {
-    debugPrint("label: $label");
     return Tab(
       child: SizedBox(
         width: double.infinity,

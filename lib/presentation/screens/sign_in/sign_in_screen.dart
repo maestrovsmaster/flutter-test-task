@@ -7,6 +7,7 @@ import 'package:pixelfield_flutter_task/core/theme/app_colors.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/sign_in/sign_in_block.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/sign_in/sign_in_event.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/sign_in/sign_in_state.dart';
+import 'package:pixelfield_flutter_task/presentation/navigation/app_router.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/custom_app_bar.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/custom_text_field.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/custom_yellow_icon_button.dart';
@@ -89,7 +90,7 @@ class _SignInScreenState extends State<SignInScreen> {
   Future<void> _navigateToMainScreen(BuildContext context) async {
     await Future.delayed(const Duration(milliseconds: 500));
     if (context.mounted) {
-      context.go('/main');
+      context.go(AppRoutes.main);
     }
   }
 
@@ -118,7 +119,7 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
         const SizedBox(height: 20),
         RememberMeCheckbox(initialValue: isCheckedRememberMe,
-          onChanged: (value) => context.read<SignInBloc>().add(ToggleRememberMe(value: value)),
+          onChanged: (value) => context.read<SignInBloc>().add(ToggleRememberMeEvent(value: value)),
         ),
         const SizedBox(height: 40),
         CustomYellowIconButton(

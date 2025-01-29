@@ -6,6 +6,8 @@ class CustomYellowIconButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final double height;
+  final Color backgroundColor;
+  final Color textColor;
 
   const CustomYellowIconButton({
     super.key,
@@ -13,19 +15,21 @@ class CustomYellowIconButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     this.height = 40,
+    this.backgroundColor = AppColors.accentColor,
+    this.textColor = AppColors.backgroundBottleDetails,
   });
 
   @override
   Widget build(BuildContext context) {
     List<Widget> children = [];
     if (icon != null) {
-      children.add(Icon(icon, color: AppColors.backgroundBottleDetails));
+      children.add(Icon(icon, color: textColor));
       children.add(const SizedBox(width: 16));
     }
     children.add(Text(
       text,
       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            color: AppColors.backgroundBottleDetails,
+            color: textColor,
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
@@ -36,7 +40,7 @@ class CustomYellowIconButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.accentColor,
+          backgroundColor: backgroundColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
