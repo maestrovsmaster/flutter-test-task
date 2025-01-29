@@ -1,0 +1,92 @@
+[
+  {
+    "id": "1",
+    "name": "Whiskey Bottle 1",
+    "imageUrl": "https://example.com/image1.jpg",
+    "count": 10,
+    "total": 100,
+    "year": 2020,
+    "batchNumber": 1
+  },
+  {
+    "id": "2",
+    "name": "Whiskey Bottle 2",
+    "imageUrl": "https://example.com/image2.jpg",
+    "count": 20,
+    "total": 200,
+    "year": 2021,
+    "batchNumber": 2
+  },
+  {
+    "id": "3",
+    "name": "Whiskey Bottle 3",
+    "imageUrl": "https://example.com/image3.jpg",
+    "count": 15,
+    "total": 150,
+    "year": 2019,
+    "batchNumber": 3
+  },
+  {
+    "id": "4",
+    "name": "Whiskey Bottle 4",
+    "imageUrl": "https://example.com/image4.jpg",
+    "count": 25,
+    "total": 250,
+    "year": 2022,
+    "batchNumber": 4
+  },
+  {
+    "id": "5",
+    "name": "Whiskey Bottle 5",
+    "imageUrl": "https://example.com/image5.jpg",
+    "count": 12,
+    "total": 120,
+    "year": 2021,
+    "batchNumber": 5
+  },
+  {
+    "id": "6",
+    "name": "Whiskey Bottle 6",
+    "imageUrl": "https://example.com/image6.jpg",
+    "count": 30,
+    "total": 300,
+    "year": 2023,
+    "batchNumber": 6
+  },
+  {
+    "id": "7",
+    "name": "Whiskey Bottle 7",
+    "imageUrl": "https://example.com/image7.jpg",
+    "count": 18,
+    "total": 180,
+    "year": 2020,
+    "batchNumber": 7
+  },
+  {
+    "id": "8",
+    "name": "Whiskey Bottle 8",
+    "imageUrl": "https://example.com/image8.jpg",
+    "count": 22,
+    "total": 220,
+    "year": 2018,
+    "batchNumber": 8
+  },
+  {
+    "id": "9",
+    "name": "Whiskey Bottle 9",
+    "imageUrl": "https://example.com/image9.jpg",
+    "count": 14,
+    "total": 140,
+    "year": 2017,
+    "batchNumber": 9
+  },
+  {
+    "id": "10",
+    "name": "Whiskey Bottle 10",
+    "imageUrl": "https://example.com/image10.jpg",
+    "count": 35,
+    "total": 350,
+    "year": 2023,
+    "batchNumber": 10
+  }
+]

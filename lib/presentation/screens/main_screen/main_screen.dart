@@ -5,7 +5,7 @@ import 'package:pixelfield_flutter_task/core/theme/app_colors.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/main_screen/main_screen_block.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/main_screen/main_screen_event.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/main_screen/main_screen_state.dart';
-import 'package:pixelfield_flutter_task/presentation/screens/my_collection/collection_screen.dart';
+import 'package:pixelfield_flutter_task/presentation/screens/my_collections_list/collections_list_screen.dart';
 import 'package:pixelfield_flutter_task/presentation/screens/placeholder_screen/placeholder_screen.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/notifications_widget.dart';
 
@@ -76,7 +76,7 @@ class MainScreen extends StatelessWidget {
       case 0:
         return PlaceholderScreen(title: translate('tab_scan'));
       case 1:
-        return const CollectionScreen();
+        return const CollectionsListScreen();
       case 2:
         return PlaceholderScreen(title: translate('tab_shop'));
       case 3:

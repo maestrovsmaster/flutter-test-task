@@ -38,9 +38,9 @@ class AppRouter {
       GoRoute(
         path: '/details',
         pageBuilder: (context, state) {
-          final item = state.extra as ItemModel;
+          final itemId = state.extra as String;
           return CustomTransitionPage(
-            child: BottleDetailsScreen(item: item),
+            child: BottleDetailsScreen(itemId: itemId),
             transitionsBuilder: slideTransition,
           );
         },

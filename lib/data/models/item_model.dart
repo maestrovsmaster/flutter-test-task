@@ -5,6 +5,8 @@ import 'tasting_notes.dart';
 
 part 'item_model.g.dart';
 
+//Command for generating Hive models: flutter pub run build_runner build
+
 @HiveType(typeId: 0)
 class ItemModel extends HiveObject {
   @HiveField(0)
@@ -73,6 +75,9 @@ class ItemModel extends HiveObject {
   @HiveField(21)
   final List<HistoryEvent>? history;
 
+  @HiveField(22)
+  final bool isDetailed;
+
   ItemModel({
     required this.id,
     required this.name,
@@ -96,6 +101,7 @@ class ItemModel extends HiveObject {
     this.officialNotes,
     this.userNotes,
     this.history,
+    this.isDetailed = false,
   });
 
   factory ItemModel.fromJson(Map<String, dynamic> json) {
@@ -126,16 +132,17 @@ class ItemModel extends HiveObject {
       finish: json['finish'],
       videoUrl: json['videoUrl'],
       officialNotes: json['officialNotes'] != null
-          ? TastingNotes.fromJson(json['officialNotes'])
+          ? TastingNotes.fromJson(Map<String, dynamic>.from(json['officialNotes']))
           : null,
       userNotes: json['userNotes'] != null
-          ? TastingNotes.fromJson(json['userNotes'])
+          ? TastingNotes.fromJson(Map<String, dynamic>.from(json['userNotes']))
           : null,
       history: json['history'] != null
           ? (json['history'] as List<dynamic>?)
-              ?.map((e) => HistoryEvent.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => HistoryEvent.fromJson(Map<String, dynamic>.from(e)))
               .toList()
           : null,
+      isDetailed: json['isDetailed'] ?? false,
     );
   }
 
@@ -163,6 +170,61 @@ class ItemModel extends HiveObject {
       'officialNotes': officialNotes?.toJson(),
       'userNotes': userNotes?.toJson(),
       'history': history?.map((e) => e.toJson()).toList(),
+      'isDetailed': isDetailed
     };
   }
+
+
+  ItemModel copyWith({
+    String? id,
+    String? name,
+    String? imageUrl,
+    int? count,
+    int? total,
+    int? year,
+    int? batchNumber,
+    String? distillery,
+    String? region,
+    String? country,
+    String? type,
+    String? ageStatement,
+    String? filled,
+    String? bottled,
+    String? caskNumber,
+    double? abv,
+    String? size,
+    String? finish,
+    String? videoUrl,
+    TastingNotes? officialNotes,
+    TastingNotes? userNotes,
+    List<HistoryEvent>? history,
+    bool? isDetailed,
+  }) {
+    return ItemModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      imageUrl: imageUrl ?? this.imageUrl,
+      count: count ?? this.count,
+      total: total ?? this.total,
+      year: year ?? this.year,
+      batchNumber: batchNumber ?? this.batchNumber,
+      distillery: distillery ?? this.distillery,
+      region: region ?? this.region,
+      country: country ?? this.country,
+      type: type ?? this.type,
+      ageStatement: ageStatement ?? this.ageStatement,
+      filled: filled ?? this.filled,
+      bottled: bottled ?? this.bottled,
+      caskNumber: caskNumber ?? this.caskNumber,
+      abv: abv ?? this.abv,
+      size: size ?? this.size,
+      finish: finish ?? this.finish,
+      videoUrl: videoUrl ?? this.videoUrl,
+      officialNotes: officialNotes ?? this.officialNotes,
+      userNotes: userNotes ?? this.userNotes,
+      history: history != null ? history.map((event) => event.copyWith()).toList() : this.history,
+      isDetailed: isDetailed ?? this.isDetailed,
+    );
+  }
+
 }

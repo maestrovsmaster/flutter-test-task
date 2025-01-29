@@ -2,6 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:pixelfield_flutter_task/core/utils/connectivity_utils.dart';
 import 'package:pixelfield_flutter_task/data/models/item_model.dart';
 import 'package:pixelfield_flutter_task/domain/repositories/collection_repository.dart';
 import 'package:pixelfield_flutter_task/domain/repositories/local_collection_repository.dart';
@@ -35,15 +36,9 @@ class CollectionBloc extends Bloc<CollectionEvent, CollectionState> {
           _currentPage++;
         }
 
-        final connectivityResult = await connectivity.checkConnectivity();
-        final allowedConnections = [
-          ConnectivityResult.mobile,
-          ConnectivityResult.wifi
-        ];
-        debugPrint("connectivityResult = $connectivityResult");
-        final hasMatchingConnection = connectivityResult.any((result) => allowedConnections.contains(result));
+        final hasConnection = await hasInternetConnection(connectivity);
 
-        if (!hasMatchingConnection) {
+        if (!hasConnection) {
           debugPrint("Offline");
           if (localRepository.hasCachedItems()) {
             final cachedItems = localRepository.getItems(page: _currentPage, limit: _pageSize);

@@ -9,3 +9,9 @@ class SwitchTabEvent extends BottleDetailsEvent {
   final int tabIndex;
   SwitchTabEvent(this.tabIndex);
 }
+
+class FetchBottleDetailsEvent extends BottleDetailsEvent {
+  final String itemId;
+
+  FetchBottleDetailsEvent(this.itemId);
+}

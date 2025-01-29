@@ -1,0 +1,55 @@
+{
+  "id": "1",
+  "name": "Whiskey Bottle 1",
+  "imageUrl": "https://example.com/image1.jpg",
+  "count": 10,
+  "total": 100,
+  "year": 2020,
+  "batchNumber": 1,
+  "distillery": "Highland Distillery",
+  "region": "Highland",
+  "country": "Scotland",
+  "type": "Single Malt",
+  "ageStatement": "12 years",
+  "filled": "2010-03-15",
+  "bottled": "2022-07-10",
+  "caskNumber": "CASK12345",
+  "abv": 46.0,
+  "size": "700ml",
+  "finish": "Sherry Oak",
+  "videoUrl": "https://example.com/video1.mp4",
+  "officialNotes": {
+    "nose": "Rich vanilla, honey, and a hint of citrus.",
+    "palate": "Smooth with dried fruit, spice, and caramel.",
+    "finish": "Long-lasting with subtle oak and sweetness."
+  },
+  "userNotes": {
+    "nose": "Sweet and fruity with hints of apple.",
+    "palate": "Creamy with toffee and a touch of pepper.",
+    "finish": "Warm with a slight smokiness."
+  },
+  "history": [
+    {
+      "label": "Production",
+      "title": "Distilled",
+      "description": "The whiskey was distilled in the Highland region.",
+      "attachments": ["https://example.com/image1.jpg"],
+      "dateTime": "2010-03-15T10:00:00Z"
+    },
+    {
+      "label": "Maturation",
+      "title": "Cask Aging",
+      "description": "Aged in sherry oak casks for 12 years.",
+      "attachments": ["https://example.com/image2.jpg"],
+      "dateTime": "2012-04-20T15:30:00Z"
+    },
+    {
+      "label": "Bottling",
+      "title": "Bottled",
+      "description": "The whiskey was bottled and prepared for distribution.",
+      "attachments": ["https://example.com/image3.jpg"],
+      "dateTime": "2022-07-10T08:45:00Z"
+    }
+  ],
+  "isDetailed": true
+}

@@ -2,6 +2,8 @@ import 'package:hive/hive.dart';
 
 part 'history_event.g.dart';
 
+//Command for generating Hive models: flutter pub run build_runner build
+
 @HiveType(typeId: 2)
 class HistoryEvent extends HiveObject {
   @HiveField(0)
@@ -50,4 +52,21 @@ class HistoryEvent extends HiveObject {
       'dateTime': dateTime?.toIso8601String(),
     };
   }
+
+  HistoryEvent copyWith({
+    String? label,
+    String? title,
+    String? description,
+    List<String>? attachments,
+    DateTime? dateTime,
+  }) {
+    return HistoryEvent(
+      label: label ?? this.label,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      attachments: attachments ?? this.attachments,
+      dateTime: dateTime ?? this.dateTime,
+    );
+  }
+
 }

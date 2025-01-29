@@ -78,13 +78,13 @@ class TabTastingNotesWidget extends StatelessWidget {
                       // Official Notes
                       if (officialNotes != null) ...[
                         buildTastingNotesSection( context,
-                            translate('nose'), officialNotes.nose),
+                            translate('nose'), officialNotes.nose ?? ''),
                         const SizedBox(height: 8),
                         buildTastingNotesSection(context,
-                            translate('palate'), officialNotes.palate),
+                            translate('palate'), officialNotes.palate ?? ''),
                         const SizedBox(height: 8),
                         buildTastingNotesSection(context,
-                            translate('finish'), officialNotes.finish),
+                            translate('finish'), officialNotes.finish ?? ''),
                       ],
                       const SizedBox(height: 32),
 
@@ -120,13 +120,13 @@ class TabTastingNotesWidget extends StatelessWidget {
                                 key: _notesKey,
                                 children: [
                                   buildTastingNotesSection(context,
-                                      translate('nose'), userNotes.nose),
+                                      translate('nose'), userNotes.nose ?? ''),
                                   const SizedBox(height: 8),
                                   buildTastingNotesSection(context,
                                       'Palate', translate('palate')),
                                   const SizedBox(height: 8),
                                   buildTastingNotesSection(context,
-                                      translate('finish'), userNotes.finish),
+                                      translate('finish'), userNotes.finish ?? ''),
                                 ],
                               )
                             : const SizedBox.shrink(key: ValueKey('empty')),
