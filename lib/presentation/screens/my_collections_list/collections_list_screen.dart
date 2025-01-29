@@ -1,10 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pixelfield_flutter_task/core/di/di_container.dart';
-import 'package:pixelfield_flutter_task/presentation/bloc/collections_list/collection_block.dart';
-import 'package:pixelfield_flutter_task/presentation/bloc/collections_list/collection_event.dart';
-import 'package:pixelfield_flutter_task/presentation/bloc/collections_list/collection_state.dart';
+import 'package:pixelfield_flutter_task/presentation/bloc/collections_list/collections_list_block.dart';
+import 'package:pixelfield_flutter_task/presentation/bloc/collections_list/collections_list_event.dart';
+import 'package:pixelfield_flutter_task/presentation/bloc/collections_list/collections_list_state.dart';
+import 'package:pixelfield_flutter_task/presentation/navigation/app_router.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/collection_item.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/error_with_refresh_widget.dart';
 
@@ -19,8 +21,8 @@ class CollectionsListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => sl<CollectionBloc>(),
-        child: BlocBuilder<CollectionBloc, CollectionState>(
+        create: (context) => sl<CollectionsListBloc>(),
+        child: BlocBuilder<CollectionsListBloc, CollectionsListState>(
           builder: (context, state) {
             if (state is CollectionLoading && state is! CollectionLoaded) {
               return const Center(child: CircularProgressIndicator());
@@ -33,7 +35,7 @@ class CollectionsListScreen extends StatelessWidget {
                   if (scrollInfo.metrics.pixels ==
                           scrollInfo.metrics.maxScrollExtent &&
                       !state.hasReachedMax) {
-                    context.read<CollectionBloc>().add(FetchItemsEvent());
+                    context.read<CollectionsListBloc>().add(FetchItemsEvent());
                   }
                   return false;
                 },
@@ -60,17 +62,17 @@ class CollectionsListScreen extends StatelessWidget {
                       }
                     }
                     return CollectionItem(item: items[index], onTap: (item) {
-                      context.push('/details', extra: item.id);
+                      context.push(AppRoutes.details, extra: item.id);
                     });
                   },
                 ),
               );
             } else if (state is CollectionError) {
-              debugPrint("error ${state.errorMessage}");
+
               return ErrorWithRefreshWidget(
                 errorMessage: state.errorMessage,
                 onRefresh: () {
-                  context.read<CollectionBloc>().add(FetchItemsEvent());
+                  context.read<CollectionsListBloc>().add(FetchItemsEvent());
                 },
               );
             } else {

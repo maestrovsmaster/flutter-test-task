@@ -8,7 +8,6 @@ Future<bool> hasInternetConnection(Connectivity connectivity) async {
     ConnectivityResult.wifi,
   ];
 
-  debugPrint("connectivityResult = $connectivityResult");
   final hasMatchingConnection = connectivityResult.any((result) => allowedConnections.contains(result));
 
   return hasMatchingConnection;

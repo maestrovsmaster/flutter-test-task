@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp.router(
-        title: 'Pixelfield Flutter Task',
+        title: 'Flutter Task',
         theme: AppTheme.theme,
         debugShowCheckedModeBanner: false,
         routerConfig: AppRouter().router,
