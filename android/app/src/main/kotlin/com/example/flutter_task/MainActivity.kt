@@ -1,4 +1,4 @@
-package com.example.pixelfield_flutter_task
+package com.example.flutter_task
 
 import io.flutter.embedding.android.FlutterActivity
 

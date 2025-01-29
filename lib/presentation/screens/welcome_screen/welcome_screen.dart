@@ -109,7 +109,7 @@ class WelcomeScreenState extends State<WelcomeScreen>
                               ),
                               TextButton(
                                 onPressed: () {
-                                  context.go('/signIn');
+                                  context.push('/signIn');
                                 },
                                 child:  Text(
                                   translate('sign_in_first'),
