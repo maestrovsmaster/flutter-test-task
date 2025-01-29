@@ -38,5 +38,10 @@
   "your_notes": "Your notes",
   "nose": "Nose",
   "palate": "Palate",
-  "finish": "Finish"
+  "finish": "Finish",
+
+  "logout_title": "Log Out",
+  "logout_message": "Are you sure you want to log out?",
+  "cancel": "Cancel",
+  "confirm": "Log Out"
 }

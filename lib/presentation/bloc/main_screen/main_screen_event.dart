@@ -10,3 +10,4 @@ class UpdateNotifications extends MainScreenEvent {
   UpdateNotifications(this.count);
 }
 
+class LogoutRequested extends MainScreenEvent {}

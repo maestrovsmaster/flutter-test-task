@@ -44,6 +44,7 @@ Future<void> _initHive() async {
   Hive.registerAdapter(ItemModelAdapter());
   Hive.registerAdapter(TastingNotesAdapter());
   Hive.registerAdapter(HistoryEventAdapter());
+  await Hive.openBox('authBox');
 }
 
 /// Loads mock data source type from .env file or falls back to default.

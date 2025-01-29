@@ -10,10 +10,11 @@ import 'package:pixelfield_flutter_task/domain/repositories/local_collection_rep
 import 'package:pixelfield_flutter_task/domain/repositories/sign_in_repository.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/auth/auth_block.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/bottle_details/bottle_details_block.dart';
-import 'package:pixelfield_flutter_task/presentation/bloc/bottle_details/bottle_details_state.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/collections_list/collection_block.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/collections_list/collection_event.dart';
+import 'package:pixelfield_flutter_task/presentation/bloc/main_screen/main_screen_block.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/sign_in/sign_in_block.dart';
+import 'package:pixelfield_flutter_task/presentation/bloc/welcome/welcome_block.dart';
 
 final sl = GetIt.instance;
 
@@ -27,7 +28,6 @@ Future<void> init({String mockType = 'assets'}) async {
   sl.registerLazySingleton(() => AuthBloc());
 
   sl.registerLazySingleton(() => SignInRepository());
-  sl.registerFactory(() => SignInBloc(repository: sl<SignInRepository>()));
 
   CollectionDataSource dataSource = mockType == 'assets'
       ? MockFromAssetsCollectionDataSource()
@@ -66,4 +66,10 @@ Future<void> init({String mockType = 'assets'}) async {
     );
     return bloc;
   });
+
+  sl.registerFactory(() => WelcomeBloc(repository: sl<SignInRepository>()));
+
+  sl.registerFactory(() => SignInBloc(repository: sl<SignInRepository>()));
+
+  sl.registerFactory(() => MainScreenBloc(repository: sl<SignInRepository>()));
 }

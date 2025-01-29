@@ -14,3 +14,8 @@ class SignInFailure extends SignInState {
 
   SignInFailure({required this.message});
 }
+
+class RememberMeUpdated extends SignInState {
+  final bool value;
+  RememberMeUpdated({required this.value});
+}
