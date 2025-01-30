@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:pixelfield_flutter_task/data/models/item_model.dart';
 
@@ -6,7 +7,9 @@ class LocalCollectionRepository {
   final Box<List<dynamic>> cacheBox;
   final Box<ItemModel> itemBox;
 
-  LocalCollectionRepository({required this.cacheBox, required this.itemBox});
+  final Box<List<String>> collectionBox;
+
+  LocalCollectionRepository({required this.cacheBox, required this.itemBox, required this.collectionBox});
 
   Future<void> saveAllItems(List<ItemModel> items) async {
     final jsonList = items.map((item) => item.toJson()).toList();
@@ -16,8 +19,6 @@ class LocalCollectionRepository {
 
   List<ItemModel> getItems({required int page, required int limit}) {
     final jsonList = cacheBox.get('all_items', defaultValue: []);
-
-    debugPrint("'OFFLINE CACHE' LocalCollectionRepository getItems ");
 
     final allItems = (jsonList as List)
         .map((json) => ItemModel.fromJson(Map<String, dynamic>.from(json as Map)))
@@ -45,12 +46,40 @@ class LocalCollectionRepository {
     try {
       await itemBox.put(itemId, item);
     }catch(e){
-      debugPrint("Error saving item to cache: $e");
+      if(kDebugMode) {
+        debugPrint("Error saving item to cache: $e");
+      }
     }
   }
-
 
   bool hasCachedItems() {
     return cacheBox.containsKey('all_items');
   }
+
+
+  /// Save Item to collection
+  Future<void> addItemToCollection(String itemId) async {
+    final List<String> currentItems = collectionBox.get('collection', defaultValue: [])!;
+    if (!currentItems.contains(itemId)) {
+      currentItems.add(itemId);
+      await collectionBox.put('collection', currentItems);
+    }
+  }
+
+  /// Remove Item from collection
+  Future<void> removeItemFromCollection(String itemId) async {
+    final List<String> currentItems = collectionBox.get('collection', defaultValue: [])!;
+    if (currentItems.contains(itemId)) {
+      currentItems.remove(itemId);
+      await collectionBox.put('collection', currentItems);
+    }
+  }
+
+  /// Check if item is added to collection
+  bool isItemAddedToCollection(String itemId) {
+    final List<String> currentItems = collectionBox.get('collection', defaultValue: [])!;
+    return currentItems.contains(itemId);
+  }
+
+
 }

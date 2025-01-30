@@ -2,16 +2,16 @@
 import 'package:equatable/equatable.dart';
 import 'package:pixelfield_flutter_task/data/models/item_model.dart';
 
-abstract class CollectionState extends Equatable {
+abstract class CollectionsListState extends Equatable {
   @override
   List<Object?> get props => [];
 }
 
-class CollectionInitial extends CollectionState {}
+class CollectionInitial extends CollectionsListState {}
 
-class CollectionLoading extends CollectionState {}
+class CollectionLoading extends CollectionsListState {}
 
-class CollectionLoaded extends CollectionState {
+class CollectionLoaded extends CollectionsListState {
   final List<ItemModel> items;
   final bool hasReachedMax;
 
@@ -28,10 +28,14 @@ class CollectionLoaded extends CollectionState {
   List<Object?> get props => [items, hasReachedMax];
 }
 
-class CollectionError extends CollectionState {
+class CollectionError extends CollectionsListState {
   final String errorMessage;
 
   CollectionError({required this.errorMessage});
+
+  @override
+  List<Object> get props => [errorMessage];
 }
+
 
 

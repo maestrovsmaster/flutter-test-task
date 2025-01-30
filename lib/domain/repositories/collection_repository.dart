@@ -15,7 +15,6 @@ class CollectionRepositoryImpl implements CollectionRepository {
 
   @override
   Future<List<ItemModel>> getItems({required int page, required int limit}) {
-    debugPrint("'ONLINE REQUEST' CollectionRepository getItems ");
     return dataSource.fetchItems(page: page, limit: limit);
   }
 

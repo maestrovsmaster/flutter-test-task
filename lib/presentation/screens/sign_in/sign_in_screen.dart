@@ -7,9 +7,11 @@ import 'package:pixelfield_flutter_task/core/theme/app_colors.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/sign_in/sign_in_block.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/sign_in/sign_in_event.dart';
 import 'package:pixelfield_flutter_task/presentation/bloc/sign_in/sign_in_state.dart';
+import 'package:pixelfield_flutter_task/presentation/navigation/app_router.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/custom_app_bar.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/custom_text_field.dart';
 import 'package:pixelfield_flutter_task/presentation/widgets/custom_yellow_icon_button.dart';
+import 'package:pixelfield_flutter_task/presentation/widgets/remember_me_checkbox.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -50,6 +52,7 @@ class _SignInScreenState extends State<SignInScreen> {
               }
 
               if (state is SignInFailure) {
+
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -58,7 +61,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           color: AppColors.errorColor,
                         )),
                     const SizedBox(height: 16),
-                    _buildSignInForm(context),
+                    _buildSignInForm(context, false),
                   ],
                 );
               }
@@ -72,7 +75,11 @@ class _SignInScreenState extends State<SignInScreen> {
                         )));
               }
 
-              return _buildSignInForm(context);
+              final isChecked = (state is RememberMeUpdated)
+                  ? state.value
+                  : context.read<SignInBloc>().rememberMe;
+
+              return _buildSignInForm(context, isChecked);
             },
           ),
         ),
@@ -83,11 +90,14 @@ class _SignInScreenState extends State<SignInScreen> {
   Future<void> _navigateToMainScreen(BuildContext context) async {
     await Future.delayed(const Duration(milliseconds: 500));
     if (context.mounted) {
-      context.go('/main');
+      context.go(AppRoutes.main);
     }
   }
 
-  Widget _buildSignInForm(BuildContext context) {
+  Widget _buildSignInForm(BuildContext context, bool isCheckedRememberMe) {
+
+
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -107,6 +117,10 @@ class _SignInScreenState extends State<SignInScreen> {
             });
           },
         ),
+        const SizedBox(height: 20),
+        RememberMeCheckbox(initialValue: isCheckedRememberMe,
+          onChanged: (value) => context.read<SignInBloc>().add(ToggleRememberMeEvent(value: value)),
+        ),
         const SizedBox(height: 40),
         CustomYellowIconButton(
           text: translate('continue'),
@@ -117,7 +131,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
             context
                 .read<SignInBloc>()
-                .add(FetchLogin(email: email, password: password));
+                .add(FetchLogin(email: email, password: password, rememberMe: isCheckedRememberMe));
           },
         ),
         const SizedBox(height: 40),
@@ -133,7 +147,7 @@ class _SignInScreenState extends State<SignInScreen> {
             const SizedBox(height: 24),
             TextButton(
               onPressed: () {
-                // Navigate to Sign In screen
+                // Navigate to RecoverPassword screen
               },
               child: Text(
                 translate('recover_password'),

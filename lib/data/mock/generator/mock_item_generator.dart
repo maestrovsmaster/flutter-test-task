@@ -2,7 +2,7 @@ import 'package:pixelfield_flutter_task/data/models/history_event.dart';
 import 'package:pixelfield_flutter_task/data/models/item_model.dart';
 import 'package:pixelfield_flutter_task/data/models/tasting_notes.dart';
 
-ItemModel generateMockItem(String id, String name, int year) {
+ItemModel generateMockItem(String id, String name, int year, {bool isDetailed = false}) {
   return ItemModel(
     id: id,
     name: name,
@@ -85,5 +85,6 @@ ItemModel generateMockItem(String id, String name, int year) {
         dateTime: DateTime(2024, 6, 15),
       ),
     ],
+    isDetailed: isDetailed
   );
 }

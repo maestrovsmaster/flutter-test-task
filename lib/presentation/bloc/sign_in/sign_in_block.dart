@@ -6,6 +6,7 @@ import 'package:pixelfield_flutter_task/presentation/bloc/sign_in/sign_in_state.
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final SignInRepository repository;
+  bool rememberMe = false;
 
   SignInBloc({required this.repository}) : super(SignInInitial()) {
     on<FetchLogin>((event, emit) async {
@@ -15,6 +16,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         final success = await repository.login(event.email, event.password);
 
         if (success) {
+          if (event.rememberMe) {
+            await repository.setLoggedIn(true);
+          }
           emit(SignInSuccess());
         } else {
           emit(SignInFailure(message: translate("invalid_email_or_password")));
@@ -22,6 +26,11 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       } catch (e) {
         emit(SignInFailure(message: translate("error_occurred")));
       }
+    });
+
+    on<ToggleRememberMeEvent>((event, emit) {
+      rememberMe = event.value;
+      emit(RememberMeUpdated(value: event.value));
     });
   }
 }

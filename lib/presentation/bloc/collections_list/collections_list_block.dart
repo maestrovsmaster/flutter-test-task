@@ -7,17 +7,17 @@ import 'package:pixelfield_flutter_task/data/models/item_model.dart';
 import 'package:pixelfield_flutter_task/domain/repositories/collection_repository.dart';
 import 'package:pixelfield_flutter_task/domain/repositories/local_collection_repository.dart';
 
-import 'collection_event.dart';
-import 'collection_state.dart';
+import 'collections_list_event.dart';
+import 'collections_list_state.dart';
 
-class CollectionBloc extends Bloc<CollectionEvent, CollectionState> {
+class CollectionsListBloc extends Bloc<CollectionsListEvent, CollectionsListState> {
   final CollectionRepository repository;
   final LocalCollectionRepository localRepository;
   final Connectivity connectivity;
   static const int _pageSize = 10;
   int _currentPage = 1;
 
-  CollectionBloc(
+  CollectionsListBloc(
       {required this.repository,
       required this.localRepository,
       required this.connectivity})
@@ -39,7 +39,6 @@ class CollectionBloc extends Bloc<CollectionEvent, CollectionState> {
         final hasConnection = await hasInternetConnection(connectivity);
 
         if (!hasConnection) {
-          debugPrint("Offline");
           if (localRepository.hasCachedItems()) {
             final cachedItems = localRepository.getItems(page: _currentPage, limit: _pageSize);
 
@@ -64,7 +63,6 @@ class CollectionBloc extends Bloc<CollectionEvent, CollectionState> {
           }
           return;
         }
-        debugPrint("Online");
 
         final List<ItemModel> newItems = await repository.getItems(
           page: _currentPage,
