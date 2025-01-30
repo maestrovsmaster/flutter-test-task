@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/adapters.dart';
 
 part 'tasting_notes.g.dart';
@@ -5,7 +6,7 @@ part 'tasting_notes.g.dart';
 //Command for generating Hive models: flutter pub run build_runner build
 
 @HiveType(typeId: 3)
-class TastingNotes extends HiveObject {
+class TastingNotes extends HiveObject  with EquatableMixin {
   @HiveField(0)
   final String? nose;
 
@@ -49,5 +50,8 @@ class TastingNotes extends HiveObject {
       finish: finish ?? this.finish,
     );
   }
+
+  @override
+  List<Object?> get props => [nose, palate, finish];
 
 }

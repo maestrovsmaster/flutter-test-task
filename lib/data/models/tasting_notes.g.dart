@@ -17,9 +17,9 @@ class TastingNotesAdapter extends TypeAdapter<TastingNotes> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TastingNotes(
-      nose: fields[0] as String,
-      palate: fields[1] as String,
-      finish: fields[2] as String,
+      nose: fields[0] as String?,
+      palate: fields[1] as String?,
+      finish: fields[2] as String?,
     );
   }
 

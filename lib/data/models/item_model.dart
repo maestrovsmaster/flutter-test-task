@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
 import 'history_event.dart';
@@ -8,7 +9,7 @@ part 'item_model.g.dart';
 //Command for generating Hive models: flutter pub run build_runner build
 
 @HiveType(typeId: 0)
-class ItemModel extends HiveObject {
+class ItemModel extends HiveObject with EquatableMixin {
   @HiveField(0)
   final String id;
 
@@ -132,7 +133,8 @@ class ItemModel extends HiveObject {
       finish: json['finish'],
       videoUrl: json['videoUrl'],
       officialNotes: json['officialNotes'] != null
-          ? TastingNotes.fromJson(Map<String, dynamic>.from(json['officialNotes']))
+          ? TastingNotes.fromJson(
+              Map<String, dynamic>.from(json['officialNotes']))
           : null,
       userNotes: json['userNotes'] != null
           ? TastingNotes.fromJson(Map<String, dynamic>.from(json['userNotes']))
@@ -173,7 +175,6 @@ class ItemModel extends HiveObject {
       'isDetailed': isDetailed
     };
   }
-
 
   ItemModel copyWith({
     String? id,
@@ -222,9 +223,37 @@ class ItemModel extends HiveObject {
       videoUrl: videoUrl ?? this.videoUrl,
       officialNotes: officialNotes ?? this.officialNotes,
       userNotes: userNotes ?? this.userNotes,
-      history: history != null ? history.map((event) => event.copyWith()).toList() : this.history,
+      history: history != null
+          ? history.map((event) => event.copyWith()).toList()
+          : this.history,
       isDetailed: isDetailed ?? this.isDetailed,
     );
   }
 
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        imageUrl,
+        count,
+        total,
+        year,
+        batchNumber,
+        distillery,
+        region,
+        country,
+        type,
+        ageStatement,
+        filled,
+        bottled,
+        caskNumber,
+        abv,
+        size,
+        finish,
+        videoUrl,
+        officialNotes,
+        userNotes,
+        history,
+        isDetailed
+      ];
 }

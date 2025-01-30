@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
 part 'history_event.g.dart';
@@ -5,7 +6,7 @@ part 'history_event.g.dart';
 //Command for generating Hive models: flutter pub run build_runner build
 
 @HiveType(typeId: 2)
-class HistoryEvent extends HiveObject {
+class HistoryEvent extends HiveObject with EquatableMixin {
   @HiveField(0)
   final String? label;
 
@@ -69,4 +70,6 @@ class HistoryEvent extends HiveObject {
     );
   }
 
+  @override
+  List<Object?> get props => [label, title, description, attachments, dateTime];
 }
