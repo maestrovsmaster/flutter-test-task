@@ -138,3 +138,9 @@ This project is for testing purposes only.
 **🚀 Now you're ready to run and test the app!**
 If you have any issues, feel free to reach out. Happy coding! 🎯
 
+### Known Issues
+
+- `flutter_native_splash` forces Java 8 (`JavaVersion.VERSION_1_8`) in some cases.
+- The project is set to use Java 17 in `build.gradle`, and the build works fine.
+- If issues arise, ensure that `compileOptions` in `android/app/build.gradle` is set to Java 17.
+
