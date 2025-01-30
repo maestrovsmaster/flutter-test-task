@@ -144,9 +144,9 @@ If you have any issues, feel free to reach out. Happy coding! 🎯
 - The project is set to use Java 17 in `build.gradle`, and the build works fine.
 - If issues arise, ensure that `compileOptions` in `android/app/build.gradle` is set to Java 17.
 
-## **Third-Party Packages Used**
-(A list of packages, as in `tech_details.md`)
+## **Third-Party Packages Used**  
+The list of third-party packages, additional features, and UI enhancements can be found in `tech_details.md`.  
 
-## **Additional Features**
-(A list of features that were not in the original requirements but were implemented)  
+## **Timing**  
+A breakdown of the time spent is documented in `timing.md`.  
 
