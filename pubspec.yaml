@@ -63,10 +63,8 @@ dev_dependencies:
 flutter_native_splash:
   color: "#0B1519"
   image: assets/images/ic_logo.png
-  branding: assets/images/ic_logo.png
   color_dark: "#0B1519"
   image_dark: assets/images/ic_logo.png
-  branding_dark: assets/images/ic_logo.png
 
   android_12:
     image: assets/images/ic_logo.png
