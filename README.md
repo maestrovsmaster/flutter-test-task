@@ -111,6 +111,5 @@ This project is for testing purposes only.
 ## Third-Party Packages Used  
 The list of third-party packages, additional features, and UI enhancements can be found in `tech_details.md`.  
 
-## Timing  
-A breakdown of the time spent is documented in `timing.md`.  
+
 
