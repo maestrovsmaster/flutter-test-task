@@ -1,5 +1,12 @@
 #  Flutter Test Task
 
+<p align="left">
+  <img src="https://github.com/user-attachments/assets/ca0857be-668e-438e-8355-191ed0dd01db" alt="pf111" height="250">
+  <img src="https://github.com/user-attachments/assets/ad5bb6f9-8c27-4eac-b04f-2cf40fc959ba" alt="img112" height="250">
+  <img src="https://github.com/user-attachments/assets/3dc312b8-6eb7-4f8d-91da-9b0ae4961877" alt="pf111" height="250">
+</p>
+
+
 This project was created as a **Flutter test task**. It includes state management, dependency injection, routing, localization, and various other technologies to build a structured and scalable Flutter application.
 
 Created by **Vasyl Horodetskyi**.
